@@ -1,4 +1,4 @@
-import type { KeyboardEvent, Ref } from 'react'
+import { useId, type KeyboardEvent, type Ref } from 'react'
 import { groupByCategory } from '../../lib/content'
 import { CATEGORY_LABELS, type ComponentEntry } from '../../lib/types'
 
@@ -16,6 +16,8 @@ interface Props {
  * 각 항목은 해시 링크(<a href="#id">)라서 새 탭 열기·링크 복사 같은 브라우저 기본 동작이 그대로 된다.
  */
 export function ComponentNav({ items, query, currentId, onSelect, activeItemRef, listRef }: Props) {
+  // 카테고리 제목 id가 드로어·사이드바 사이에서 겹치지 않도록 인스턴스마다 접두어를 둔다.
+  const idPrefix = useId()
   // 위·아래 화살표, Home/End로 항목 사이를 이동한다. Tab 순서는 그대로 두어 일반 링크 목록처럼 동작한다.
   const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {
     const links = [...e.currentTarget.querySelectorAll<HTMLAnchorElement>('a[href]')]
@@ -68,9 +70,9 @@ export function ComponentNav({ items, query, currentId, onSelect, activeItemRef,
         </>
       ) : (
         groupByCategory(items).map((group, idx) => (
-          <section key={group.category} aria-labelledby={`cat-${group.category}`}>
+          <section key={group.category} aria-labelledby={`${idPrefix}-${group.category}`}>
             {idx > 0 && <hr className="mx-4 my-2 border-outline-variant" />}
-            <h2 id={`cat-${group.category}`} className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">
+            <h2 id={`${idPrefix}-${group.category}`} className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">
               {CATEGORY_LABELS[group.category]}
             </h2>
             <ul>{group.items.map(renderItem)}</ul>

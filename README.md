@@ -27,7 +27,7 @@
 - **실동작 데모**: 모든 컴포넌트에 직접 조작할 수 있는 데모와 "초기화" 버튼을 제공합니다.
 - **검색**: 영문 이름, 다른 이름(`more_vert`, `Overflow Menu`), 한국어 이름(`더보기 메뉴`)으로 찾을 수 있습니다.
 - **공유 가능한 주소**: 선택한 컴포넌트가 URL 해시(`/#kebab-menu`)에 반영됩니다.
-- **Material Design 3 레이아웃**: Top App Bar와 모달 내비게이션 드로어로 구성했습니다.
+- **반응형 Material Design 3 레이아웃**: 1024px 이상에서는 검색과 목록이 있는 사이드바(260px)를 항상 표시합니다. 그보다 좁으면 Top App Bar의 햄버거 버튼으로 내비게이션 드로어를 엽니다. 768px 이상에서는 데모를 360×720 휴대폰 프레임에 담고, 더 좁으면 프레임 없이 본문 너비를 꽉 채웁니다.
 - **라이트/다크 테마**: 기본값은 시스템 설정을 따릅니다.
 - **접근성**: 키보드 탐색, 모달 포커스 트랩, 아이콘 버튼 `aria-label`, `prefers-reduced-motion`을 지원하고, 터치 영역은 최소 44px입니다.
 
@@ -68,8 +68,8 @@ src/
 ├── index.css               # Material 3 디자인 토큰, 테마, 동작 줄이기 설정
 ├── components/
 │   ├── Icon.tsx, IconButton.tsx
-│   ├── layout/             # TopAppBar, NavDrawer, ComponentNav, SearchField,
-│   │                       # ContentPanel, DemoHost, PhoneFrame, ThemeToggle
+│   ├── layout/             # Sidebar(데스크톱), TopAppBar·NavDrawer(모바일), NavPanel, ComponentNav,
+│   │                       # SearchField, ContentPanel, DemoHost, PhoneFrame, ThemeToggle
 │   └── mdx/                # MDX 본문 스타일 매핑
 ├── content/components/     # 컴포넌트별 .mdx 파일 (설명 콘텐츠)
 ├── demos/                  # 컴포넌트별 데모 파일 (*Demo.tsx)

@@ -14,7 +14,7 @@ export function ContentPanel({ entry }: { entry: ComponentEntry }) {
   }
 
   return (
-    <article className="mx-auto max-w-3xl px-4 pb-24 pt-2 md:px-8">
+    <article className="mx-auto max-w-3xl px-4 pb-24 pt-2 md:px-8 lg:pt-10">
       <header>
         <p className="text-label-lg text-primary">{CATEGORY_LABELS[entry.category]}</p>
         <h1 className="mt-1 text-headline-sm">{entry.name}</h1>

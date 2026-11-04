@@ -1,7 +1,7 @@
 {
   "name": "mobile-ui-glossary",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "description": "모바일 UI/UX 컴포넌트를 실동작 데모로 익히는 인터랙티브 용어 사전",
   "license": "MIT",
