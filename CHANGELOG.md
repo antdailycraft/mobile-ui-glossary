@@ -7,10 +7,23 @@
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-11-04
+
+### 추가됨 (Added)
+
+- 포커스 트랩, 드래그 훅, Action Sheet 데모의 상호작용 테스트(jsdom, Testing Library)
+- GitHub Actions CI: push와 PR마다 타입 검사, 테스트, 빌드 실행
+- GitHub Pages 배포 workflow (저장소 변수 `PAGES_ENABLED`가 `true`일 때 `main` push마다 배포)
+
 ### 변경됨 (Changed)
 
 - 목록의 카테고리 제목을 한국어와 영문으로 함께 표기(예: 오버레이 · OVERLAY)하고 항목 개수를 붙여, 누를 수 있는 항목과 구분되게 함
 - 본문 위쪽의 카테고리 표시도 한국어와 영문을 함께 표기
+- Segmented Control, Navigation Drawer 문서의 Material 3 Expressive 설명을 공식 문서 기준으로 확정 (Segmented button과 Navigation drawer는 폐기 예정이며, 각각 연결형 버튼 그룹과 펼친 Navigation rail로 대체)
+
+### 수정됨 (Fixed)
+
+- Action Sheet 데모에서 바깥(스크림)을 누르면 닫히던 동작을 iPhone의 실제 동작에 맞춰 "취소" 버튼과 Esc 키로만 닫히도록 수정하고, 문서에 iPhone·iPad 차이를 추가
 
 ## [0.3.0] - 2026-11-04
 
@@ -61,7 +74,8 @@
 - README, CONTRIBUTING, MIT 라이선스
 - 개발 서버를 `0.0.0.0:20173`, 미리보기 서버를 `0.0.0.0:20174`에 바인딩해 같은 네트워크의 기기에서 접속 가능
 
-[Unreleased]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/antdailycraft/mobile-ui-glossary/releases/tag/v0.1.0
