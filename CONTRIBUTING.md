@@ -145,6 +145,13 @@ demo: KebabMenuDemo            # src/demos/KebabMenuDemo.tsx
 
 `_shared/` 폴더는 데모 자동 등록 대상에서 빠집니다.
 
+### 테스트
+
+- 테스트는 대상 파일 옆에 `*.test.ts(x)`로 둡니다. 데모 테스트(`ActionSheetDemo.test.tsx`)는 이름이 `Demo.tsx`로 끝나지 않으므로 데모 자동 등록 대상에 잡히지 않습니다.
+- 기본 실행 환경은 `node`입니다. DOM이 필요한 테스트는 파일 첫 줄에 `// @vitest-environment jsdom`을 적고, [Testing Library](https://testing-library.com/)(`@testing-library/react`, `@testing-library/user-event`)로 사용자 입장에서 조작합니다.
+- jsdom에 없는 브라우저 API(예: `setPointerCapture`)는 테스트 안에서 빈 함수로 대신합니다.
+- 포커스 트랩·드래그처럼 여러 데모가 함께 쓰는 공용 코드를 고치면 해당 테스트(`useFocusTrap.test.tsx`, `useDrag.test.tsx`)를 함께 갱신합니다.
+
 ### 접근성 체크리스트
 
 - [ ] 아이콘만 있는 버튼에는 `IconButton`을 쓰거나 `aria-label`을 지정했습니다.
@@ -158,7 +165,7 @@ demo: KebabMenuDemo            # src/demos/KebabMenuDemo.tsx
 
 ## PR 체크리스트
 
-- [ ] `npm run build`가 통과합니다(타입 검사, 테스트, 빌드).
+- [ ] `npm run build`가 통과합니다(타입 검사, 테스트, 빌드). PR을 올리면 GitHub Actions CI가 같은 검사를 다시 실행합니다.
 - [ ] 모바일 너비(360px 안팎)와 데스크톱 너비에서 직접 확인했습니다.
 - [ ] 라이트·다크 테마 모두에서 확인했습니다.
 - [ ] 키보드만으로 데모를 조작해 보았습니다.

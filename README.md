@@ -57,12 +57,24 @@ npm install
 | `npm run dev` | 개발 서버를 실행합니다. 주소는 http://localhost:20173 이며, 같은 네트워크의 기기에서는 `http://<내 IP>:20173`으로 접속합니다. |
 | `npm run build` | 타입 검사, 콘텐츠 검증 테스트, 프로덕션 빌드를 차례로 실행합니다. 결과물은 `dist/`에 생성됩니다. |
 | `npm run preview` | 빌드 결과물을 확인합니다. 주소는 http://localhost:20174 입니다. |
-| `npm test` | 단위 테스트와 콘텐츠 검증을 실행합니다. |
+| `npm test` | 단위 테스트, 상호작용 테스트(jsdom), 콘텐츠 검증을 실행합니다. |
 | `npm run typecheck` | 타입 검사만 실행합니다. |
+
+### 지속적 통합과 배포
+
+GitHub Actions(`.github/workflows/ci.yml`)가 모든 push와 PR에서 `npm run build`(타입 검사, 테스트, 빌드)를 실행합니다.
+
+`main`에 push하면 빌드 결과를 GitHub Pages에 배포할 수 있습니다. 배포는 다음 두 가지가 갖춰졌을 때만 실행됩니다.
+
+1. 저장소 **Settings → Pages**에서 Source를 **GitHub Actions**로 지정합니다. 무료 요금제에서는 공개 저장소만 Pages를 쓸 수 있습니다.
+2. 저장소 **Settings → Secrets and variables → Actions → Variables**에 `PAGES_ENABLED` 변수를 `true`로 추가합니다.
+
+배포 주소는 `https://<소유자>.github.io/mobile-ui-glossary/`입니다. 해시 라우팅을 쓰므로 Pages에서도 `/#snackbar` 같은 주소가 그대로 동작합니다.
 
 ## 프로젝트 구조
 
 ```
+.github/workflows/ci.yml    # CI(타입 검사·테스트·빌드)와 GitHub Pages 배포
 src/
 ├── App.tsx                 # 해시 라우팅과 화면 골격
 ├── index.css               # Material 3 디자인 토큰, 테마, 동작 줄이기 설정
