@@ -1,0 +1,41 @@
+---
+id: segmented-control
+name: Segmented Control
+aliases: [Segmented Button, Toggle Button Group, 세그먼트 컨트롤, 세그먼티드 버튼]
+category: navigation
+platforms: [material, ios]
+summary: 2~5개의 선택지를 한 줄로 붙여 놓고, 그중 하나(또는 여러 개)를 골라 보기나 설정을 바꾸는 컨트롤입니다.
+related: [bottom-navigation, chip, top-app-bar]
+demo: SegmentedControlDemo
+---
+
+## 정의
+
+Segmented Control은 몇 개의 버튼을 하나의 막대로 이어 붙인 컨트롤입니다. 선택지 하나를 누르면 그 칸이 선택 상태로 바뀌고, 같은 화면 안의 **보기 방식이나 설정**이 즉시 바뀝니다. 예를 들어 달력의 "일 / 주 / 월", 지도의 "지도 / 위성"이 있습니다.
+
+iOS에서는 **Segmented Control**이라고 부르며, 회색 트랙 위를 흰 썸(thumb)이 미끄러지듯 움직여 선택을 표시합니다. Material Design 3에서는 **Segmented button**이라고 부르며, 테두리가 있는 알약 모양 막대에서 선택된 칸에 색과 체크 표시가 붙습니다. Material은 **여러 개를 동시에 고르는 다중 선택**도 지원합니다.
+
+## 사용하면 좋은 경우
+
+- 같은 콘텐츠를 **다른 방식으로 보여 주는** 선택지가 2~5개일 때 (목록/격자, 일/주/월)
+- 선택지가 서로 **배타적**이고, 바꾸면 결과가 바로 보여야 할 때
+- 짧은 필터 몇 개를 켜고 끄는 다중 선택이 필요할 때(Material Segmented button)
+
+## 사용하지 말아야 할 경우
+
+- 서로 다른 **화면으로 이동**하는 용도일 때. 이동은 탭이나 Bottom Navigation이 맡습니다.
+- 선택지가 **6개 이상**이거나 라벨이 길 때. 칸이 좁아져 읽기 어렵습니다. 드롭다운이나 Chip 목록을 씁니다.
+- 선택지가 하나뿐인 켜기/끄기일 때. Switch가 맞습니다.
+- 설정을 저장하는 버튼처럼 **동작을 실행하는** 버튼을 섞어 넣을 때.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 명칭 | Segmented button | Segmented control |
+| 선택지 수 | 2~5개 | iPhone에서는 5개 이하 권장 |
+| 선택 방식 | 단일 선택, 다중 선택 모두 가능 | 단일 선택 |
+| 선택 표시 | 선택 칸에 secondary container 색과 체크 아이콘 | 트랙 위를 미끄러지는 썸 |
+| 모양 | 테두리가 있는 알약 모양 | 회색 트랙과 둥근 사각형 썸 |
+
+Material의 최신 업데이트(M3 Expressive)에서는 Segmented button 대신 **연결형 버튼 그룹**(connected button group)을 쓰도록 권장하는 쪽으로 바뀌고 있습니다. 동작과 역할은 거의 같습니다.

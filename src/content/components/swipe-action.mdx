@@ -1,0 +1,40 @@
+---
+id: swipe-action
+name: Swipe Action
+aliases: [Swipe to Delete, Swipe to Dismiss, Swipe Actions, 스와이프 액션, 밀어서 삭제]
+category: interaction
+platforms: [material, ios]
+summary: 목록의 행을 옆으로 밀면 그 뒤에 숨어 있던 동작 버튼(삭제, 보관 등)이 드러나는 제스처입니다.
+related: [snackbar, kebab-menu, action-sheet, pull-to-refresh]
+demo: SwipeActionDemo
+---
+
+## 정의
+
+Swipe Action은 목록의 행을 가로로 밀어서 그 항목에 대한 동작을 꺼내는 인터랙션입니다. 행이 밀린 만큼 뒤쪽 레이어가 드러나고, 그 자리에 **삭제·보관·고정** 같은 버튼이 나타납니다.
+
+조금 밀었다 놓으면 행이 제자리로 돌아가고, 일정 거리 이상 밀면 버튼이 보이는 상태로 멈춥니다. iOS에서는 행을 끝까지 밀면 버튼을 누르지 않아도 첫 번째 동작이 바로 실행되는데, 이를 **full swipe**라고 합니다. 이 데모도 행 너비의 60% 이상 밀면 바로 삭제됩니다.
+
+## 사용하면 좋은 경우
+
+- 메일, 메시지, 할 일처럼 **같은 동작을 여러 항목에 반복**해서 하는 목록
+- 화면을 복잡하게 만들지 않고 **자주 쓰는 동작 한두 개**를 빠르게 꺼내고 싶을 때
+- 삭제나 보관처럼 결과를 **Snackbar의 실행 취소로 되돌릴 수 있는** 동작
+
+## 사용하지 말아야 할 경우
+
+- 제스처가 그 동작에 접근하는 **유일한 방법**일 때. 스와이프는 눈에 보이지 않아 발견하기 어렵고, 보조기기 사용자는 쓸 수 없습니다. 이 데모의 ⋯ 버튼이나 키보드 조작처럼 같은 동작에 닿는 다른 경로를 반드시 둡니다.
+- 되돌릴 수 없는 위험한 동작을 full swipe 한 번에 실행할 때. 확인 단계를 두거나 실행 취소를 제공합니다.
+- 행 자체가 가로로 스크롤되거나, 화면 가장자리 스와이프(뒤로 가기)와 겹치는 위치일 때
+- 동작이 세 개를 넘을 때. 행 뒤에 다 들어가지 않으므로 Kebab Menu나 Action Sheet로 옮깁니다.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 명칭 | 전용 컴포넌트 없음. Compose의 `SwipeToDismissBox`, 리스트의 swipe to dismiss 패턴 | Swipe actions (`UIContextualAction`, SwiftUI `.swipeActions`) |
+| 흔한 형태 | 끝까지 밀면 즉시 실행(예: Gmail 보관). 뒤쪽에 아이콘과 배경색만 표시 | 버튼이 드러난 상태로 멈추고, 버튼을 누르거나 full swipe로 실행 |
+| 방향 | 앱마다 다름. 양쪽 방향에 서로 다른 동작을 두기도 함 | leading(왼쪽→오른쪽)과 trailing(오른쪽→왼쪽)을 구분해 각각 여러 버튼 가능 |
+| 파괴적 동작 | 실행 후 Snackbar로 실행 취소 제공이 일반적 | `destructive` 스타일(빨간색)로 표시 |
+
+iOS의 표준 목록은 행을 열어 둔 채 다른 곳을 탭하거나 다른 행을 밀면 열린 행이 닫힙니다. 이 데모도 한 번에 한 행만 열리도록 같은 규칙을 따릅니다.

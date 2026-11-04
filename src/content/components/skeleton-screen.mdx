@@ -1,0 +1,39 @@
+---
+id: skeleton-screen
+name: Skeleton Screen
+aliases: [Skeleton, Skeleton Loader, Placeholder, Shimmer, 스켈레톤 UI]
+category: interaction
+platforms: [material, ios, web]
+summary: 콘텐츠를 불러오는 동안, 완성될 화면과 같은 모양의 회색 블록을 먼저 보여 주는 로딩 표시 방식입니다.
+related: [empty-state, pull-to-refresh, card]
+demo: SkeletonScreenDemo
+---
+
+## 정의
+
+Skeleton Screen은 실제 데이터가 도착하기 전에 텍스트 줄, 이미지, 아바타가 놓일 자리를 **같은 크기의 단순한 블록**으로 그려 두는 로딩 방식입니다. 블록 위로 빛이 지나가는 효과(shimmer)나 천천히 깜빡이는 효과를 더해 "아직 불러오는 중"임을 알립니다.
+
+화면 가운데 스피너만 도는 방식과 달리 **무엇이 어디에 나올지 미리 보여** 주므로, 기다리는 시간이 짧게 느껴집니다. 데이터가 들어와도 레이아웃이 밀리지 않는다는 장점도 있습니다.
+
+## 사용하면 좋은 경우
+
+- 피드, 카드 목록, 프로필처럼 **레이아웃이 예측 가능한** 화면을 처음 불러올 때
+- 로딩이 수백 밀리초에서 몇 초 정도 걸리는 경우
+- 데이터가 들어오면서 화면 요소가 밀리고 튀는 현상(레이아웃 이동)을 막고 싶을 때
+
+## 사용하지 말아야 할 경우
+
+- 로딩이 매우 짧아서 스켈레톤이 **번쩍하고 사라질** 때. 오히려 깜빡임으로 보입니다. 짧은 지연 뒤에만 표시하는 방법을 고려합니다.
+- 진행률을 알 수 있는 작업(파일 업로드 등). 진행률을 보여 주는 progress indicator가 더 정확합니다.
+- 버튼 누른 뒤의 처리 대기처럼 **화면 일부의 짧은 작업**. 버튼 안의 작은 인디케이터면 충분합니다.
+- 실제 레이아웃과 **다른 모양**의 스켈레톤. 콘텐츠가 들어올 때 오히려 크게 바뀌어 혼란을 줍니다.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 컴포넌트 | 없음. 로딩은 progress indicator(원형·선형)를 기본으로 안내 | 없음. 로딩은 activity indicator·progress view를 기본으로 안내 |
+| 가까운 API | (Compose 기본 라이브러리에는 없음) | SwiftUI `.redacted(reason: .placeholder)`가 뷰를 자리 표시 모양으로 바꿈 |
+| 실무 사용 | YouTube, Facebook 등 많은 앱과 웹에서 사실상 표준 패턴 | 같음 |
+
+두 가이드라인 모두 Skeleton을 공식 컴포넌트로 정의하지 않지만, 웹과 앱에서 널리 쓰이는 패턴입니다. 접근성 측면에서는 블록 자체를 보조기기에서 숨기고 영역에 `aria-busy`를 지정합니다. 반복되는 shimmer 애니메이션은 동작 줄이기 설정이 켜져 있으면 멈춥니다.

@@ -7,6 +7,27 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-11-04
+
+### 추가됨 (Added)
+
+- 컴포넌트 21종의 설명과 실동작 데모
+  - 오버레이: Standard Bottom Sheet, Scrim, Dialog, Action Sheet, Toast, Tooltip, Coach Mark
+  - 내비게이션: Top App Bar, Bottom Navigation, Navigation Drawer, Hamburger Menu, Meatball Menu, Segmented Control
+  - 컴포넌트: FAB, Chip, Badge, Card
+  - 인터랙션·상태: Swipe Action, Pull-to-Refresh, Skeleton Screen, Empty State
+- 데모용 공용 아이콘 23종
+- 개발·미리보기 서버에서 호스트 이름 `metis`와 Tailscale MagicDNS 도메인(`*.ts.net`) 접속 허용
+
+### 변경됨 (Changed)
+
+- Modal Bottom Sheet, Snackbar, Kebab Menu의 관련 컴포넌트 링크를 새 컴포넌트와 연결
+
+### 수정됨 (Fixed)
+
+- 모달 안의 포커스할 수 없는 영역(제목, 여백, 스크림)을 누르면 포커스가 모달 밖으로 빠져 Esc와 Tab 가두기가 동작하지 않던 문제
+- 개발 서버 실행 중에 새 파일을 추가하면 그 파일의 Tailwind 클래스가 페이지에 반영되지 않던 문제
+
 ## [0.1.0] - 2026-11-04
 
 ### 추가됨 (Added)

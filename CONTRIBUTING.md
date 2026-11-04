@@ -25,6 +25,8 @@ Node.js 20 이상이 필요합니다.
 
 개발 서버는 `0.0.0.0:20173`, 미리보기 서버는 `0.0.0.0:20174`에 바인딩됩니다. 같은 Wi-Fi에 연결된 휴대폰에서 `http://<개발 PC의 IP>:20173`으로 접속하면 실제 터치로 데모를 확인할 수 있습니다. 포트가 이미 사용 중이면 다른 포트로 넘어가지 않고 오류로 멈춥니다(`strictPort`). 디버깅·개발용 포트는 20000 이상을 씁니다.
 
+허용된 호스트 이름은 `localhost`, IP 주소, `metis`, Tailscale MagicDNS 도메인(`*.ts.net`)입니다. 예를 들어 `http://metis:20173`으로 접속할 수 있습니다. 다른 호스트 이름으로 접속하려면 `vite.config.ts`의 `allowedHosts`에 추가합니다. Vite는 DNS 리바인딩 공격을 막기 위해 목록에 없는 호스트를 403으로 거부합니다.
+
 ## 커밋 규칙
 
 [Conventional Commits 1.0.0](https://www.conventionalcommits.org/ko/v1.0.0/)을 따릅니다.

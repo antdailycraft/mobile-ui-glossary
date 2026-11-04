@@ -1,0 +1,42 @@
+---
+id: bottom-navigation
+name: Bottom Navigation
+aliases: [Navigation Bar, Tab Bar, Bottom Tab, 하단 내비게이션, 탭 바]
+category: navigation
+platforms: [material, ios]
+summary: 화면 아래에 3~5개의 최상위 목적지를 늘 보여 주고, 한 번 탭으로 그 사이를 오가게 하는 막대입니다.
+related: [top-app-bar, navigation-drawer, badge, fab, segmented-control]
+demo: BottomNavigationDemo
+---
+
+## 정의
+
+Bottom Navigation은 화면 아래쪽에 붙은 막대에 앱의 **최상위 목적지** 3~5개를 아이콘과 라벨로 늘어놓은 내비게이션입니다. 사용자는 어느 화면에서든 한 번 탭해서 다른 목적지로 바로 이동할 수 있습니다.
+
+Material Design 2에서는 Bottom navigation이라고 불렀습니다. Material Design 3에서는 이름이 **Navigation bar**로 바뀌었고, 선택된 목적지의 아이콘 뒤에 알약 모양의 활성 표시(active indicator)를 둡니다. iOS에서는 같은 역할을 하는 컴포넌트를 **Tab bar**라고 부릅니다.
+
+## 사용하면 좋은 경우
+
+- 앱의 주요 영역이 **3~5개**이고, 사용자가 그 사이를 자주 오갈 때 (홈, 검색, 알림, 프로필 등)
+- 각 목적지가 서로 **같은 수준**이고 독립적인 화면일 때
+- 휴대폰처럼 화면이 좁아서 엄지가 닿는 아래쪽에 이동 수단을 두고 싶을 때
+
+## 사용하지 말아야 할 경우
+
+- 목적지가 **2개뿐**일 때. 탭(Tabs)이나 Segmented Control이 낫습니다.
+- 목적지가 **6개 이상**일 때. 라벨이 잘리고 누르기 어려워집니다. Navigation Drawer를 함께 쓰거나 구조를 다시 묶습니다.
+- 공유, 새로 만들기처럼 이동이 아닌 **동작**을 탭으로 넣으려 할 때. 동작은 FAB나 앱 바에 둡니다.
+- 태블릿처럼 화면이 넓을 때. Material은 Navigation rail, iOS는 사이드바로 바꾸는 것을 권장합니다.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 명칭 | Navigation bar (이전 명칭 Bottom navigation) | Tab bar |
+| 목적지 수 | 3~5개 | 보통 5개 이하. 넘치면 "더 보기" 탭으로 묶음 |
+| 선택 표시 | 아이콘 뒤 알약 모양 활성 표시, 채워진 아이콘 | 선택된 탭의 아이콘·라벨 색 변경 |
+| 라벨 | 항상 표시 권장(선택된 항목만 보이게도 가능) | 항상 표시 |
+| 선택된 탭 다시 탭 | 목록 맨 위로 스크롤하는 것이 일반적 | 탭 안 내비게이션의 첫 화면으로 돌아감 |
+| 넓은 화면 | Navigation rail로 전환 | 사이드바로 전환 |
+
+iOS는 탭마다 **자기만의 화면 이동 기록**을 따로 유지합니다. 탭을 바꿨다가 돌아오면 보던 하위 화면이 그대로 남아 있습니다. Android 앱도 최근에는 같은 방식을 따르는 경우가 많습니다.

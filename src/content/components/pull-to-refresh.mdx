@@ -1,0 +1,40 @@
+---
+id: pull-to-refresh
+name: Pull-to-Refresh
+aliases: [Swipe to Refresh, Refresh Control, 당겨서 새로고침]
+category: interaction
+platforms: [material, ios]
+summary: 목록 맨 위에서 화면을 아래로 당겼다 놓으면 최신 내용을 다시 불러오는 제스처입니다.
+related: [skeleton-screen, swipe-action, top-app-bar]
+demo: PullToRefreshDemo
+---
+
+## 정의
+
+Pull-to-Refresh는 스크롤이 **맨 위에 있을 때** 콘텐츠를 아래로 더 끌어내리면 새로고침 인디케이터가 나타나는 인터랙션입니다. 일정 거리 이상 당긴 뒤 놓으면 새로고침이 시작되고, 덜 당기고 놓으면 인디케이터가 그냥 사라집니다.
+
+당기는 동안 인디케이터가 손가락을 따라 움직이고 모양이 바뀌어서 "얼마나 더 당겨야 하는지"를 알려 줍니다. 손을 떼면 불러오기가 끝날 때까지 회전하는 인디케이터가 그 자리에 머뭅니다.
+
+## 사용하면 좋은 경우
+
+- 피드, 메일함, 알림처럼 **시간 순으로 새 항목이 위에 쌓이는** 목록
+- 자동 갱신은 하지만 사용자가 "지금 바로" 최신 상태를 확인하고 싶어 하는 화면
+- 화면 맨 위에 새로고침 버튼을 둘 공간이 부족할 때 (단, 대체 수단은 따로 둡니다)
+
+## 사용하지 말아야 할 경우
+
+- 새 항목이 아래쪽에 추가되는 목록(채팅 등)이나 **순서가 시간과 무관한** 목록
+- 지도, 캔버스처럼 아래로 끄는 동작이 이미 **다른 의미**를 갖는 화면
+- 내용이 실시간으로 계속 갱신되어 사용자가 새로고침할 이유가 없을 때
+- 제스처만 유일한 새로고침 수단일 때. 키보드·보조기기 사용자를 위해 메뉴나 앱 바에 새로고침 동작을 함께 둡니다.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 명칭 | Pull to refresh (Compose `PullToRefreshBox`, View의 `SwipeRefreshLayout`) | Refresh content controls (`UIRefreshControl`, SwiftUI `.refreshable`) |
+| 인디케이터 | 작은 원형 표면 안의 circular progress indicator | 회전하는 activity indicator(스피너), 선택적으로 제목 문구 |
+| 콘텐츠 움직임 | 콘텐츠는 그대로, 인디케이터가 **위에 겹쳐** 내려옴 | 콘텐츠가 함께 아래로 밀리며 그 위 빈 공간에 스피너가 드러남 |
+| 위치 | 화면 위쪽 가운데 | 내비게이션 바 바로 아래 |
+
+이 데모는 Material 방식입니다. 인디케이터가 목록 위로 겹쳐 내려오고, 당긴 거리에 따라 화살표가 회전합니다. 터치에서는 `touchmove`를 직접 처리해, 당기는 동안에만 브라우저의 기본 스크롤을 막습니다.

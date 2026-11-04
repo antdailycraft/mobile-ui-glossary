@@ -1,0 +1,43 @@
+---
+id: standard-bottom-sheet
+name: Standard Bottom Sheet
+aliases: [Persistent Bottom Sheet, Non-modal Bottom Sheet, 비모달 바텀 시트, 고정 바텀 시트]
+category: overlay
+platforms: [material, ios]
+summary: 화면 아래에 붙어 있으면서 뒤쪽 화면을 가리거나 막지 않고, 본 화면과 함께 조작할 수 있는 보조 패널입니다.
+related: [modal-bottom-sheet, scrim, navigation-drawer]
+demo: StandardBottomSheetDemo
+---
+
+## 정의
+
+Standard Bottom Sheet는 화면 아래 가장자리에 붙어 있는 **비모달(non-modal)** 표면입니다. Modal Bottom Sheet와 달리 스크림이 없고, 시트가 펼쳐져 있어도 뒤쪽 화면을 계속 조작할 수 있습니다.
+
+보통 핸들을 끌어서 높이를 바꿉니다. 내용 일부만 보이는 **접힌 높이**와 목록 전체가 보이는 **펼친 높이** 사이를 오가며, 사용자가 닫기 전까지 화면에 남아 있습니다. 지도 앱에서 지도 위에 장소 목록을 띄워 두는 방식이 대표적인 예입니다.
+
+## 사용하면 좋은 경우
+
+- 본 화면(지도, 미디어, 편집 화면)과 **보조 정보**를 함께 보면서 오가야 할 때
+- 사용자가 시트의 높이를 조절해 보조 정보를 얼마나 볼지 직접 정하게 하고 싶을 때
+- 재생 중인 음악, 진행 중인 길 안내처럼 **계속 떠 있어야 하는** 상태 정보를 보여 줄 때
+
+## 사용하지 말아야 할 경우
+
+- 사용자가 지금 하던 일을 멈추고 **선택을 끝내야** 할 때. 뒤쪽 조작을 막는 Modal Bottom Sheet나 Dialog를 씁니다.
+- 화면 아래에 Bottom Navigation이 있어 시트와 겹칠 때. 둘이 겹치면 어느 쪽을 조작하는지 헷갈립니다.
+- 본 화면이 작아서 시트가 접힌 상태로도 내용 대부분을 가릴 때
+- 시트 안의 스크롤과 시트 높이 조절 제스처가 충돌하는데 이를 구분해 줄 장치가 없을 때
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 공식 명칭 | Bottom sheet (standard) | Sheet (뒤쪽 화면과 상호작용 허용) |
+| 스크림 | 없음 | detent별로 지정. `largestUndimmedDetentIdentifier` 이하 높이에서는 어둡게 하지 않음 |
+| 뒤쪽 화면 조작 | 항상 가능 | SwiftUI `presentationBackgroundInteraction`으로 허용 범위 지정 |
+| 높이 | 접힘·펼침 등 여러 높이 | detent(`medium`, `large`, 사용자 정의 높이) |
+| 대표 사례 | Google 지도의 장소 목록 | Apple 지도의 검색 시트 |
+
+iOS에서는 비모달 시트가 별도 컴포넌트로 있지 않습니다. 같은 Sheet에서 어느 높이까지 뒤쪽 화면을 어둡게 하지 않고 조작을 허용할지 설정하는 방식으로 만듭니다.
+
+이 데모는 핸들을 **누르기만 해도** 시트를 접고 펼 수 있게 했습니다. 드래그가 어려운 사용자에게는 이런 대체 수단이 필요합니다.

@@ -31,7 +31,14 @@
 - **라이트/다크 테마**: 기본값은 시스템 설정을 따릅니다.
 - **접근성**: 키보드 탐색, 모달 포커스 트랩, 아이콘 버튼 `aria-label`, `prefers-reduced-motion`을 지원하고, 터치 영역은 최소 44px입니다.
 
-현재 수록된 컴포넌트는 Modal Bottom Sheet, Snackbar, Kebab Menu입니다.
+### 수록 컴포넌트 (24종)
+
+| 카테고리 | 컴포넌트 |
+|---|---|
+| 오버레이 | Modal Bottom Sheet, Standard Bottom Sheet, Scrim, Dialog, Action Sheet, Snackbar, Toast, Tooltip, Coach Mark |
+| 내비게이션 | Top App Bar, Bottom Navigation, Navigation Drawer, Hamburger Menu, Kebab Menu, Meatball Menu, Segmented Control |
+| 컴포넌트 | FAB, Chip, Badge, Card |
+| 인터랙션·상태 | Swipe Action, Pull-to-Refresh, Skeleton Screen, Empty State |
 
 ## 설치
 
