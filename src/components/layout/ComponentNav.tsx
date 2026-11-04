@@ -1,0 +1,82 @@
+import type { KeyboardEvent, Ref } from 'react'
+import { groupByCategory } from '../../lib/content'
+import { CATEGORY_LABELS, type ComponentEntry } from '../../lib/types'
+
+interface Props {
+  items: readonly ComponentEntry[]
+  query: string
+  currentId: string
+  onSelect: () => void
+  activeItemRef: Ref<HTMLAnchorElement>
+  listRef: Ref<HTMLElement>
+}
+
+/**
+ * 컴포넌트 목록. 데스크톱 사이드바에서도 그대로 재사용할 수 있게 드로어와 분리해 두었다.
+ * 각 항목은 해시 링크(<a href="#id">)라서 새 탭 열기·링크 복사 같은 브라우저 기본 동작이 그대로 된다.
+ */
+export function ComponentNav({ items, query, currentId, onSelect, activeItemRef, listRef }: Props) {
+  // 위·아래 화살표, Home/End로 항목 사이를 이동한다. Tab 순서는 그대로 두어 일반 링크 목록처럼 동작한다.
+  const onKeyDown = (e: KeyboardEvent<HTMLElement>) => {
+    const links = [...e.currentTarget.querySelectorAll<HTMLAnchorElement>('a[href]')]
+    const i = links.indexOf(document.activeElement as HTMLAnchorElement)
+    const go = (n: number) => {
+      e.preventDefault()
+      links[(n + links.length) % links.length]?.focus()
+    }
+    if (e.key === 'ArrowDown') go(i + 1)
+    else if (e.key === 'ArrowUp') go(i < 0 ? links.length - 1 : i - 1)
+    else if (e.key === 'Home') go(0)
+    else if (e.key === 'End') go(links.length - 1)
+  }
+
+  const renderItem = (c: ComponentEntry) => {
+    const active = c.id === currentId
+    return (
+      <li key={c.id}>
+        <a
+          href={`#${c.id}`}
+          ref={active ? activeItemRef : undefined}
+          aria-current={active ? 'page' : undefined}
+          onClick={onSelect}
+          className={`state-layer flex min-h-14 items-center rounded-full px-4 text-label-lg ${
+            active ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant'
+          }`}
+        >
+          {c.name}
+        </a>
+      </li>
+    )
+  }
+
+  if (query && items.length === 0) {
+    return (
+      <p className="px-7 py-6 text-body-md text-on-surface-variant">
+        ‘{query}’에 해당하는 컴포넌트가 없습니다.
+        <br />
+        영문 이름이나 다른 이름(예: overflow, 더보기)으로도 찾아보세요.
+      </p>
+    )
+  }
+
+  return (
+    <nav ref={listRef} aria-label="컴포넌트" onKeyDown={onKeyDown} className="px-3 pb-4">
+      {query ? (
+        <>
+          <h2 className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">검색 결과 {items.length}개</h2>
+          <ul>{items.map(renderItem)}</ul>
+        </>
+      ) : (
+        groupByCategory(items).map((group, idx) => (
+          <section key={group.category} aria-labelledby={`cat-${group.category}`}>
+            {idx > 0 && <hr className="mx-4 my-2 border-outline-variant" />}
+            <h2 id={`cat-${group.category}`} className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">
+              {CATEGORY_LABELS[group.category]}
+            </h2>
+            <ul>{group.items.map(renderItem)}</ul>
+          </section>
+        ))
+      )}
+    </nav>
+  )
+}
