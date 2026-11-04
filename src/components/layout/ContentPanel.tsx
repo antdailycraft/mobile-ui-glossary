@@ -1,7 +1,7 @@
 import { mdxComponents } from '../mdx/MdxComponents'
 import { DemoHost } from './DemoHost'
 import { getComponent } from '../../lib/content'
-import { CATEGORY_LABELS, PLATFORM_LABELS, type ComponentEntry } from '../../lib/types'
+import { CATEGORY_LABELS, CATEGORY_LABELS_EN, PLATFORM_LABELS, type ComponentEntry } from '../../lib/types'
 
 /** 선택한 컴포넌트 한 건을 보여 준다. 순서: 이름·다른 이름 → 한 줄 정의 → 본문 → 데모 → 관련 컴포넌트 */
 export function ContentPanel({ entry }: { entry: ComponentEntry }) {
@@ -16,7 +16,9 @@ export function ContentPanel({ entry }: { entry: ComponentEntry }) {
   return (
     <article className="mx-auto max-w-3xl px-4 pb-24 pt-2 md:px-8 lg:pt-10">
       <header>
-        <p className="text-label-lg text-primary">{CATEGORY_LABELS[entry.category]}</p>
+        <p className="text-label-lg text-primary">
+          {CATEGORY_LABELS[entry.category]} · {CATEGORY_LABELS_EN[entry.category]}
+        </p>
         <h1 className="mt-1 text-headline-sm">{entry.name}</h1>
         {entry.aliases.length > 0 && (
           <p className="mt-1 text-body-md text-on-surface-variant">

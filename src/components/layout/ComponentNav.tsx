@@ -1,6 +1,6 @@
 import { useId, type KeyboardEvent, type Ref } from 'react'
 import { groupByCategory } from '../../lib/content'
-import { CATEGORY_LABELS, type ComponentEntry } from '../../lib/types'
+import { CATEGORY_LABELS, CATEGORY_LABELS_EN, type ComponentEntry } from '../../lib/types'
 
 interface Props {
   items: readonly ComponentEntry[]
@@ -72,8 +72,22 @@ export function ComponentNav({ items, query, currentId, onSelect, activeItemRef,
         groupByCategory(items).map((group, idx) => (
           <section key={group.category} aria-labelledby={`${idPrefix}-${group.category}`}>
             {idx > 0 && <hr className="mx-4 my-2 border-outline-variant" />}
-            <h2 id={`${idPrefix}-${group.category}`} className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">
-              {CATEGORY_LABELS[group.category]}
+            {/* 카테고리 제목은 누를 수 없는 묶음 이름이다. 항목(링크)과 헷갈리지 않도록
+                작은 대문자 영문과 항목 개수를 붙여 "제목"처럼 보이게 한다.
+                좁은 사이드바에서 줄이 넘치면 단어 중간이 아니라 한국어와 영문 사이에서 나뉘도록 각각 nowrap으로 묶는다. */}
+            <h2
+              id={`${idPrefix}-${group.category}`}
+              className="flex items-start gap-2 px-4 pb-2 pt-4 text-label-md text-on-surface-variant"
+            >
+              <span className="min-w-0 flex-1">
+                <span className="whitespace-nowrap">{CATEGORY_LABELS[group.category]}</span>{' '}
+                <span aria-hidden="true">·</span>{' '}
+                <span className="whitespace-nowrap uppercase tracking-wider">{CATEGORY_LABELS_EN[group.category]}</span>
+              </span>
+              <span className="shrink-0 rounded-full bg-surface-container-highest px-2 py-0.5 tabular-nums">
+                {group.items.length}
+                <span className="sr-only">개</span>
+              </span>
             </h2>
             <ul>{group.items.map(renderItem)}</ul>
           </section>

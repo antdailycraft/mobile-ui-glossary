@@ -11,6 +11,16 @@ export const CATEGORY_LABELS: Record<Category, string> = {
   interaction: '인터랙션·상태',
 }
 
+/**
+ * 카테고리 영문 이름. 목록 항목(컴포넌트 이름)이 영문이라, 카테고리 제목에도 영문을 함께 적어 표기를 맞춘다.
+ */
+export const CATEGORY_LABELS_EN: Record<Category, string> = {
+  overlay: 'Overlay',
+  navigation: 'Navigation',
+  component: 'Components',
+  interaction: 'Interaction & State',
+}
+
 export const PLATFORMS = ['material', 'ios', 'web'] as const
 export type Platform = (typeof PLATFORMS)[number]
 
