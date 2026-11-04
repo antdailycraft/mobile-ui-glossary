@@ -61,7 +61,12 @@ export default function ActionSheetDemo() {
         </div>
       </DemoScreen>
 
-      <Scrim visible={open} onClick={() => close('바깥 영역을 눌러 취소했습니다.')} />
+      {/* iPhone의 UIKit Action Sheet는 바깥을 눌러도 닫히지 않는다. 실제 동작에 맞춰 스크림은 안내만 하고,
+          닫기는 "취소" 버튼과 Esc 키(키보드 접근성)로만 한다. */}
+      <Scrim
+        visible={open}
+        onClick={() => setStatus('iPhone의 Action Sheet는 바깥을 눌러도 닫히지 않습니다. “취소”를 눌러 닫으세요.')}
+      />
 
       <div
         ref={sheetRef}
