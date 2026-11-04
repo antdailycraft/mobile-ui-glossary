@@ -172,5 +172,13 @@ demo: KebabMenuDemo            # src/demos/KebabMenuDemo.tsx
 1. `CHANGELOG.md`의 `## [Unreleased]` 내용을 새 버전 제목(`## [0.2.0] - YYYY-MM-DD`) 아래로 옮기고, 빈 `[Unreleased]` 섹션을 남겨 둡니다.
 2. `package.json`의 `version`을 같은 버전으로 올립니다.
 3. `chore(release): v0.2.0` 메시지로 커밋하고, `v0.2.0` 태그를 붙입니다.
+4. `CHANGELOG.md` 맨 아래의 비교 링크를 갱신합니다. `[Unreleased]`의 비교 기준을 새 태그로 바꾸고, 새 버전의 링크를 한 줄 추가합니다.
+
+   ```
+   [Unreleased]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.2.0...HEAD
+   [0.2.0]: https://github.com/antdailycraft/mobile-ui-glossary/compare/v0.1.0...v0.2.0
+   ```
+
+5. `git push`로 `main`을, `git push origin v0.2.0`으로 태그를 올립니다.
 
 변경 유형 제목은 다음 중에서 씁니다: `추가됨 (Added)`, `변경됨 (Changed)`, `폐기 예정 (Deprecated)`, `제거됨 (Removed)`, `수정됨 (Fixed)`, `보안 (Security)`.
