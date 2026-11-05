@@ -50,6 +50,11 @@ const PATHS = {
   warning: 'M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z',
   chevronRight: 'M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z',
   expandMore: 'M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z',
+  expandLess: 'M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z',
+  // 채워진 삼각형(caret) 계열. 꺾인 선(chevron) 계열인 expandMore·chevronRight와 구분해서 쓴다.
+  arrowDropDown: 'M7 10l5 5 5-5z',
+  arrowDropUp: 'M7 14l5-5 5 5z',
+  arrowRight: 'M10 17l5-5-5-5v10z',
   photo: 'M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z',
   refresh:
     'M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z',

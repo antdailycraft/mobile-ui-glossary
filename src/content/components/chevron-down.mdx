@@ -1,0 +1,49 @@
+---
+id: chevron-down
+name: Chevron Down
+aliases: [ChevronDown, 셰브런, 쉐브론, 꺾쇠 아이콘, expand_more, keyboard_arrow_down, chevron.down]
+category: component
+platforms: [material, ios]
+summary: ⌄처럼 꺾인 선 모양의 아래 방향 아이콘으로, 눌러서 숨겨진 내용을 펼치거나 접을 수 있다는 것을 알려 줍니다.
+related: [caret-down, card, standard-bottom-sheet]
+demo: ChevronDownDemo
+---
+
+## 정의
+
+Chevron은 **⌄, ›처럼 두 선이 한 점에서 꺾이는** 모양의 아이콘입니다. 속이 채워진 삼각형(Caret)과 달리 선으로만 그립니다. 이름은 군복 계급장의 V자 무늬(chevron)에서 왔습니다.
+
+아래를 향한 Chevron Down은 주로 **이 자리에서 내용이 아래로 펼쳐진다**는 뜻으로 씁니다. 아코디언, 접이식 카드, "더 보기"처럼 같은 화면 안에서 영역이 늘어나는 곳에 붙습니다. 펼친 뒤에는 아이콘을 180° 돌려 위를 향하게(⌃) 해서 다시 누르면 접힌다는 것을 보여 줍니다.
+
+방향을 바꾸면 의미도 달라집니다.
+
+- **› (오른쪽)**: 다른 화면으로 이동합니다. iOS 목록 행 끝의 disclosure indicator가 대표적입니다.
+- **‹ (왼쪽)**: 이전 화면으로 돌아갑니다. iOS 내비게이션 바의 뒤로 가기 버튼에 씁니다.
+- **⌄ / ⌃ (아래·위)**: 제자리에서 펼치고 접습니다.
+
+## 사용하면 좋은 경우
+
+- 아코디언이나 FAQ처럼 **제목만 보여 주고 본문은 접어 두는** 목록
+- 카드나 설정 그룹에서 세부 항목을 필요할 때만 펼칠 때
+- 긴 설명을 몇 줄만 보여 주고 "더 보기"로 나머지를 펼칠 때
+- 화면 아래에 붙은 시트나 패널을 **접어서 내린다**는 것을 알릴 때
+
+## 사용하지 말아야 할 경우
+
+- 선택지 목록이 열리는 드롭다운. Material은 이 자리에 채워진 삼각형(`arrow_drop_down`)을 씁니다. [Caret Down](#caret-down)을 참고하세요.
+- 누르면 **다른 화면으로 이동**하는 행. 이때는 오른쪽 Chevron(›)을 씁니다.
+- 아이콘만 두고 펼침 상태를 알리지 않을 때. 버튼에 `aria-expanded`를 함께 지정해야 스크린 리더 사용자도 열림·닫힘을 압니다.
+- 펼친 뒤에도 아이콘 방향이 그대로일 때. 위로 돌려 다시 접을 수 있다는 것을 보여 줍니다.
+
+## 플랫폼별 차이
+
+| 항목 | Material Design 3 | iOS HIG |
+|---|---|---|
+| 아이콘 이름 | `expand_more`(⌄), `expand_less`(⌃), `keyboard_arrow_down`, `chevron_right` | SF Symbols `chevron.down`, `chevron.up`, `chevron.right` |
+| 펼침 표시 | ⌄ 아이콘이 ⌃로 바뀌거나 180° 회전 | 접이식 그룹(`DisclosureGroup`)에서 ›가 ⌄로 90° 회전 |
+| 화면 이동 | 목록 행 끝의 ›는 선택 사항 | 목록 행 끝의 ›(disclosure indicator)가 표준 |
+| 뒤로 가기 | 화살표(←) 아이콘 | ‹ Chevron과 이전 화면 제목 |
+
+두 플랫폼 모두 "제자리에서 펼침"에는 아래 Chevron을, "다른 화면으로 이동"에는 오른쪽 Chevron을 쓰는 관례가 같습니다. 다만 iOS의 접이식 그룹은 접힌 상태를 ›로, 펼친 상태를 ⌄로 보여 줍니다.
+
+**접근성 주의:** Chevron은 장식으로 숨기고(`aria-hidden`), 의미는 버튼 이름과 `aria-expanded` 값으로 전달합니다.
