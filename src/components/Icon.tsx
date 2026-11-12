@@ -1,5 +1,6 @@
 /*
  * Material Icons(24px 그리드)의 SVG 경로를 직접 담아 둔다.
+ * 출처: Google Material Icons (https://github.com/google/material-design-icons), Apache License 2.0
  * 아이콘 패키지 전체를 받지 않고 실제로 쓰는 것만 둔다. 의미는 항상 버튼의 aria-label로 전달하고 아이콘 자체는 장식으로 숨긴다.
  */
 const PATHS = {

@@ -45,7 +45,7 @@
 Node.js 20 이상이 필요합니다.
 
 ```bash
-git clone <저장소 주소>
+git clone https://github.com/antdailycraft/mobile-ui-glossary.git
 cd mobile-ui-glossary
 npm install
 ```
@@ -106,3 +106,5 @@ src/
 ## 라이선스
 
 [MIT](./LICENSE) © 2026 Suha Park
+
+아이콘은 [Google Material Icons](https://github.com/google/material-design-icons)의 SVG 경로를 옮겨 썼으며, [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)을 따릅니다.
