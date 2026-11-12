@@ -2,6 +2,8 @@
 
 모바일 UI/UX 컴포넌트를 **실제로 동작하는 데모**로 익히는 인터랙티브 용어 사전입니다.
 
+**바로 보기:** https://antdailycraft.github.io/mobile-ui-glossary/
+
 ## 목차
 
 - [배경](#배경)
@@ -64,7 +66,7 @@ npm install
 
 GitHub Actions(`.github/workflows/ci.yml`)가 모든 push와 PR에서 `npm run build`(타입 검사, 테스트, 빌드)를 실행합니다.
 
-`main`에 push하면 빌드 결과를 GitHub Pages에 배포할 수 있습니다. 배포는 다음 두 가지가 갖춰졌을 때만 실행됩니다.
+`main`에 push하거나 Actions 화면에서 workflow를 수동 실행하면 빌드 결과를 GitHub Pages에 배포합니다. 현재 배포 주소는 https://antdailycraft.github.io/mobile-ui-glossary/ 입니다. 배포는 다음 두 가지가 갖춰졌을 때만 실행됩니다.
 
 1. 저장소 **Settings → Pages**에서 Source를 **GitHub Actions**로 지정합니다. 무료 요금제에서는 공개 저장소만 Pages를 쓸 수 있습니다.
 2. 저장소 **Settings → Secrets and variables → Actions → Variables**에 `PAGES_ENABLED` 변수를 `true`로 추가합니다.

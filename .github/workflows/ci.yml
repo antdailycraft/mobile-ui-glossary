@@ -1,4 +1,4 @@
-# 모든 push와 PR에서 타입 검사·테스트·빌드를 돌리고, main에 push되면 GitHub Pages에 배포한다.
+# 모든 push와 PR에서 타입 검사·테스트·빌드를 돌리고, main에 push되거나 수동 실행(workflow_dispatch)하면 GitHub Pages에 배포한다.
 # 배포는 저장소 변수 PAGES_ENABLED가 'true'일 때만 한다. Pages를 켤 수 없는 저장소(예: 무료 요금제의 비공개 저장소)에서
 # 배포 단계가 실패해 CI 전체가 빨간색이 되지 않게 하기 위해서다.
 name: CI
@@ -30,13 +30,13 @@ jobs:
       # build 스크립트가 tsc -b, vitest run, vite build를 차례로 실행한다.
       # Pages는 https://<owner>.github.io/<repo>/ 아래에서 서비스되므로 base를 저장소 이름으로 맞춘다.
       - run: npm run build -- --base=/${{ github.event.repository.name }}/
-      - if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PAGES_ENABLED == 'true'
+      - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.PAGES_ENABLED == 'true'
         uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.PAGES_ENABLED == 'true'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.PAGES_ENABLED == 'true'
     needs: build
     runs-on: ubuntu-latest
     permissions:
