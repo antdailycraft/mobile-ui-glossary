@@ -25,3 +25,8 @@ export function getDemo(name: string): LazyExoticComponent<ComponentType> | unde
   }
   return Demo
 }
+
+/** React.lazy가 기억한 실패를 지워 다음 시도에서 로더를 다시 호출한다. */
+export function resetDemo(name: string): void {
+  cache.delete(name)
+}

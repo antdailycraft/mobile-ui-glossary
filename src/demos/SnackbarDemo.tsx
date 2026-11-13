@@ -53,7 +53,15 @@ export default function SnackbarDemo() {
         {mails.length === 0 ? (
           <div className="flex flex-col items-center gap-4 px-6 py-12 text-center">
             <p className="text-body-lg text-on-surface-variant">모든 메일을 보관했습니다.</p>
-            <button type="button" className={tonalButton} onClick={() => setMails(INITIAL)}>
+            <button
+              type="button"
+              className={tonalButton}
+              onClick={() => {
+                setMails(INITIAL)
+                setSnack(null)
+                setStatus('메일을 다시 채웠습니다. 보관 버튼으로 다시 체험해 보세요.')
+              }}
+            >
               메일 다시 채우기
             </button>
           </div>
@@ -109,7 +117,10 @@ interface SnackbarProps {
  * 마우스를 올리거나 키보드 포커스가 들어오면 타이머를 멈춰서, 실행 취소 버튼을 누르기 전에 사라지지 않게 한다(WCAG 2.2.1).
  */
 function Snackbar({ message, actionLabel, onAction, onTimeout }: SnackbarProps) {
-  const [paused, setPaused] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [focused, setFocused] = useState(false)
+  // 두 조건을 따로 기억해야 포인터가 떠나도 키보드 사용자의 실행 취소 기회가 유지된다.
+  const paused = hovered || focused
   const remaining = useRef(DURATION)
   const onTimeoutRef = useRef(onTimeout)
   useEffect(() => {
@@ -129,10 +140,12 @@ function Snackbar({ message, actionLabel, onAction, onTimeout }: SnackbarProps) 
 
   return (
     <div
-      onPointerEnter={() => setPaused(true)}
-      onPointerLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
+      onPointerEnter={() => setHovered(true)}
+      onPointerLeave={() => setHovered(false)}
+      onFocus={() => setFocused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false)
+      }}
       className="pointer-events-auto flex min-h-12 items-center gap-2 rounded-sm bg-inverse-surface py-1 pl-4 pr-2 text-inverse-on-surface shadow-elev-3 transition-[opacity,translate] duration-300 ease-emphasized-decelerate starting:translate-y-4 starting:opacity-0"
     >
       <p className="flex-1 py-2 text-body-md">{message}</p>

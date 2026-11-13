@@ -42,3 +42,35 @@ describe('searchComponents', () => {
     expect(searchComponents(list, 'undo').map((c) => c.id)).toEqual(['a', 'b'])
   })
 })
+
+describe('검색 확장과 필터', () => {
+  const list: ComponentMeta[] = [
+    { ...make('modal-bottom-sheet', 'Modal Bottom Sheet', ['바텀 시트']), platforms: ['material', 'ios'] },
+    { ...make('bottom-navigation', 'Bottom Navigation', ['하단 탐색']), category: 'navigation' },
+    { ...make('action-sheet', 'Action Sheet', ['액션 시트']), platforms: ['ios'] },
+  ]
+
+  it('단어 순서가 달라도 모든 검색 단어가 포함된 항목을 찾는다', () => {
+    expect(searchComponents(list, 'sheet modal').map((c) => c.id)).toEqual(['modal-bottom-sheet'])
+    expect(searchComponents(list, 'modal 바텀').map((c) => c.id)).toEqual(['modal-bottom-sheet'])
+    expect(searchComponents(list, 'modal 없음')).toEqual([])
+  })
+
+  it('연속 일치를 단어별 일치보다 먼저 보여 준다', () => {
+    const ranked = [make('a', 'Sheet Modal'), make('b', 'Modal Sheet')]
+    expect(searchComponents(ranked, 'modal sheet').map((c) => c.id)).toEqual(['b', 'a'])
+  })
+
+  it('카테고리와 플랫폼, 검색어를 모두 적용한다', () => {
+    expect(searchComponents(list, 'sheet', { category: 'overlay', platform: 'ios' })).toHaveLength(2)
+    expect(searchComponents(list, '', { category: 'navigation', platform: 'ios' })).toEqual([])
+    expect(searchComponents(list, '', { platform: 'material' }).map((c) => c.id))
+      .toEqual(['modal-bottom-sheet', 'bottom-navigation'])
+    expect(list).toHaveLength(3)
+  })
+
+  it('분해된 한글과 구분자만 있는 검색어도 처리한다', () => {
+    expect(searchComponents(list, '바텀'.normalize('NFD')).map((c) => c.id)).toEqual(['modal-bottom-sheet'])
+    expect(searchComponents(list, ' /-_ ')).toEqual(list)
+  })
+})

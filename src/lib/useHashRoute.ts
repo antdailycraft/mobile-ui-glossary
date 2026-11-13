@@ -5,7 +5,15 @@ const subscribe = (onChange: () => void) => {
   return () => window.removeEventListener('hashchange', onChange)
 }
 
-const getHashId = () => decodeURIComponent(window.location.hash.replace(/^#\/?/, ''))
+const getHashId = () => {
+  const hash = window.location.hash.replace(/^#\/?/, '')
+  try {
+    return decodeURIComponent(hash)
+  } catch {
+    // 잘못 인코딩된 공유 주소도 앱 전체 오류 대신 기존의 찾을 수 없음 화면으로 보낸다.
+    return hash
+  }
+}
 
 /**
  * URL 해시(/#modal-bottom-sheet)를 선택 상태의 단일 출처로 쓴다.

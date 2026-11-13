@@ -1,15 +1,17 @@
 import { mdxComponents } from '../mdx/MdxComponents'
 import { DemoHost } from './DemoHost'
 import { getComponent } from '../../lib/content'
+import { useReducedMotion } from '../../lib/useReducedMotion'
 import { CATEGORY_LABELS, CATEGORY_LABELS_EN, PLATFORM_LABELS, type ComponentEntry } from '../../lib/types'
 
 /** 선택한 컴포넌트 한 건을 보여 준다. 순서: 이름·다른 이름 → 한 줄 정의 → 본문 → 데모 → 관련 컴포넌트 */
 export function ContentPanel({ entry }: { entry: ComponentEntry }) {
   const { Body } = entry
+  const reducedMotion = useReducedMotion()
   const related = entry.related.map(getComponent).filter((c): c is ComponentEntry => Boolean(c))
 
   const scrollToDemo = () => {
-    document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    document.getElementById('demo-section')?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' })
     document.getElementById('demo-heading')?.focus({ preventScroll: true })
   }
 

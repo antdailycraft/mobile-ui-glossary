@@ -5,6 +5,7 @@ import { CATEGORY_LABELS, CATEGORY_LABELS_EN, type ComponentEntry } from '../../
 interface Props {
   items: readonly ComponentEntry[]
   query: string
+  filtering: boolean
   currentId: string
   onSelect: () => void
   activeItemRef: Ref<HTMLAnchorElement>
@@ -15,7 +16,7 @@ interface Props {
  * 컴포넌트 목록. 데스크톱 사이드바에서도 그대로 재사용할 수 있게 드로어와 분리해 두었다.
  * 각 항목은 해시 링크(<a href="#id">)라서 새 탭 열기·링크 복사 같은 브라우저 기본 동작이 그대로 된다.
  */
-export function ComponentNav({ items, query, currentId, onSelect, activeItemRef, listRef }: Props) {
+export function ComponentNav({ items, query, filtering, currentId, onSelect, activeItemRef, listRef }: Props) {
   // 카테고리 제목 id가 드로어·사이드바 사이에서 겹치지 않도록 인스턴스마다 접두어를 둔다.
   const idPrefix = useId()
   // 위·아래 화살표, Home/End로 항목 사이를 이동한다. Tab 순서는 그대로 두어 일반 링크 목록처럼 동작한다.
@@ -51,19 +52,19 @@ export function ComponentNav({ items, query, currentId, onSelect, activeItemRef,
     )
   }
 
-  if (query && items.length === 0) {
+  if (filtering && items.length === 0) {
     return (
-      <p className="px-7 py-6 text-body-md text-on-surface-variant">
-        ‘{query}’에 해당하는 컴포넌트가 없습니다.
+      <p className="wrap-anywhere px-7 py-6 text-body-md text-on-surface-variant">
+        {query.trim() ? `‘${query}’에 해당하는 컴포넌트가 없습니다.` : '선택한 조건에 맞는 컴포넌트가 없습니다.'}
         <br />
-        영문 이름이나 다른 이름(예: overflow, 더보기)으로도 찾아보세요.
+        다른 검색어를 입력하거나 카테고리·플랫폼 조건을 바꿔 보세요.
       </p>
     )
   }
 
   return (
     <nav ref={listRef} aria-label="컴포넌트" onKeyDown={onKeyDown} className="px-3 pb-4">
-      {query ? (
+      {filtering ? (
         <>
           <h2 className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">검색 결과 {items.length}개</h2>
           <ul>{items.map(renderItem)}</ul>
