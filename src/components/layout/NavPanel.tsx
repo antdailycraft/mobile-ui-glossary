@@ -1,4 +1,5 @@
 import { useImperativeHandle, useMemo, useRef, useState, type KeyboardEvent, type ReactNode, type Ref } from 'react'
+import { Icon } from '../Icon'
 import { ComponentNav } from './ComponentNav'
 import { SearchField } from './SearchField'
 import { normalize, searchComponents } from '../../lib/search'
@@ -75,25 +76,31 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
         <div className="space-y-2">
           <label className="grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-2 text-body-md text-on-surface-variant">
             카테고리
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value as Category | '')}
-              className="min-h-11 w-full rounded-lg border border-outline bg-surface-container-low px-2 text-body-lg text-on-surface"
-            >
-              <option value="">전체</option>
-              {CATEGORIES.map((value) => <option key={value} value={value}>{CATEGORY_LABELS[value]}</option>)}
-            </select>
+            <span className="relative min-w-0">
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value as Category | '')}
+                className="min-h-11 w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-body-lg text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
+              >
+                <option value="">전체</option>
+                {CATEGORIES.map((value) => <option key={value} value={value}>{CATEGORY_LABELS[value]}</option>)}
+              </select>
+              <Icon name="expandMore" className="pointer-events-none absolute end-3 top-1/2 size-5 -translate-y-1/2 forced-colors:hidden" />
+            </span>
           </label>
           <label className="grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-2 text-body-md text-on-surface-variant">
             플랫폼
-            <select
-              value={platform}
-              onChange={(e) => setPlatform(e.target.value as Platform | '')}
-              className="min-h-11 w-full rounded-lg border border-outline bg-surface-container-low px-2 text-body-lg text-on-surface"
-            >
-              <option value="">전체</option>
-              {PLATFORMS.map((value) => <option key={value} value={value}>{PLATFORM_LABELS[value]}</option>)}
-            </select>
+            <span className="relative min-w-0">
+              <select
+                value={platform}
+                onChange={(e) => setPlatform(e.target.value as Platform | '')}
+                className="min-h-11 w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-body-lg text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
+              >
+                <option value="">전체</option>
+                {PLATFORMS.map((value) => <option key={value} value={value}>{PLATFORM_LABELS[value]}</option>)}
+              </select>
+              <Icon name="expandMore" className="pointer-events-none absolute end-3 top-1/2 size-5 -translate-y-1/2 forced-colors:hidden" />
+            </span>
           </label>
         </div>
         {filtering && (
