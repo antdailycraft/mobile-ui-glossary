@@ -159,7 +159,7 @@ export default function HamburgerMenuDemo() {
             aria-label="메일 메뉴"
             inert={!open}
             className={`absolute inset-y-0 left-0 z-40 w-[75%] rounded-r-2xl bg-surface-container-low px-3 py-4 shadow-elev-1 transition-transform duration-300 ease-emphasized ${
-              open ? 'translate-x-0' : '-translate-x-[calc(100%+16px)]'
+              open ? 'translate-x-0' : '-translate-x-[calc(100%+1rem)]'
             }`}
           >
             <p className="px-4 pb-2 text-title-sm text-on-surface-variant">메일</p>
@@ -185,12 +185,12 @@ export default function HamburgerMenuDemo() {
 
 /** 가로줄 세 개가 ✕로 바뀌는 아이콘. 가운데 줄은 사라지고 위아래 줄이 45도씩 회전한다. */
 function HamburgerIcon({ open }: { open: boolean }) {
-  const bar = 'absolute left-0 h-0.5 w-[18px] rounded-full bg-current transition-[transform,opacity] duration-200 ease-emphasized'
+  const bar = 'absolute left-0 h-0.5 w-[1.125rem] rounded-full bg-current transition-[transform,opacity] duration-200 ease-emphasized'
   return (
-    <span aria-hidden="true" className="relative block h-3 w-[18px]">
-      <span className={`${bar} top-0 ${open ? 'translate-y-[5px] rotate-45' : ''}`} />
-      <span className={`${bar} top-[5px] ${open ? 'opacity-0' : ''}`} />
-      <span className={`${bar} top-[10px] ${open ? '-translate-y-[5px] -rotate-45' : ''}`} />
+    <span aria-hidden="true" className="relative block h-3 w-[1.125rem]">
+      <span className={`${bar} top-0 ${open ? 'translate-y-[0.3125rem] rotate-45' : ''}`} />
+      <span className={`${bar} top-[0.3125rem] ${open ? 'opacity-0' : ''}`} />
+      <span className={`${bar} top-[0.625rem] ${open ? '-translate-y-[0.3125rem] -rotate-45' : ''}`} />
     </span>
   )
 }

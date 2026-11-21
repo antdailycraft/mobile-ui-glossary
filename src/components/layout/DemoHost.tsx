@@ -11,6 +11,7 @@ import { getDemo, resetDemo } from '../../lib/demos'
  */
 export function DemoHost({ demo, title }: { demo: string; title: string }) {
   const [resetKey, setResetKey] = useState(0)
+  const [showGuide, setShowGuide] = useState(true)
   const headingRef = useRef<HTMLHeadingElement>(null)
   const Demo = getDemo(demo)
   const reset = () => {
@@ -19,22 +20,33 @@ export function DemoHost({ demo, title }: { demo: string; title: string }) {
   }
 
   return (
-    <section aria-labelledby="demo-heading" className="mt-10 scroll-mt-20" id="demo-section">
-      <div className="mb-1 flex items-center justify-between gap-2">
+    <section aria-labelledby="demo-heading" className="mt-10 scroll-mt-20 lg:scroll-mt-4" id="demo-section">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-x-2">
         <h2 ref={headingRef} id="demo-heading" tabIndex={-1} className="text-title-lg outline-none">
           실동작 데모
         </h2>
-        <button
-          type="button"
-          onClick={reset}
-          className="state-layer inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-label-lg text-primary"
-        >
-          <Icon name="restart" className="size-[18px]" />
-          초기화
-        </button>
+        <div className="flex flex-wrap items-center gap-x-2">
+          <label className="flex min-h-11 cursor-pointer items-center gap-2 px-2 text-label-lg">
+            <input
+              type="checkbox"
+              checked={showGuide}
+              onChange={(event) => setShowGuide(event.target.checked)}
+              className="size-4 accent-primary"
+            />
+            조작 가이드
+          </label>
+          <button
+            type="button"
+            onClick={reset}
+            className="state-layer inline-flex min-h-12 items-center gap-2 rounded-full px-4 text-label-lg text-primary"
+          >
+            <Icon name="restart" className="size-[1.125rem]" />
+            초기화
+          </button>
+        </div>
       </div>
       <p className="mb-4 text-body-md text-on-surface-variant">화면 안에서 직접 눌러 보고 끌어 보세요.</p>
-      <PhoneFrame label={`${title} 데모 화면`}>
+      <PhoneFrame showGuide={showGuide} label={`${title} 데모 화면`}>
         {Demo ? (
           <DemoErrorBoundary
             key={`${demo}-${resetKey}`}

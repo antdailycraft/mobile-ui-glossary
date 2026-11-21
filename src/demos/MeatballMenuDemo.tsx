@@ -78,7 +78,7 @@ export default function MeatballMenuDemo() {
         <h3 className="mb-2 mt-6 text-title-sm text-on-surface-variant">같은 역할, 다른 방향</h3>
         <dl className="grid grid-cols-2 gap-3 text-center">
           <div className="rounded-xl border border-outline-variant p-3">
-            <dt className="text-[28px] leading-8" aria-hidden="true">
+            <dt className="text-[1.75rem] leading-8" aria-hidden="true">
               ⋮
             </dt>
             <dd className="text-body-sm">
@@ -88,7 +88,7 @@ export default function MeatballMenuDemo() {
             </dd>
           </div>
           <div className="rounded-xl border-2 border-primary p-3">
-            <dt className="text-[28px] leading-8" aria-hidden="true">
+            <dt className="text-[1.75rem] leading-8" aria-hidden="true">
               ⋯
             </dt>
             <dd className="text-body-sm">
@@ -199,7 +199,7 @@ function MeatballMenu({ label, items, circle, onSelect, onDismiss }: MeatballMen
           aria-label={label}
           onKeyDown={onMenuKeyDown}
           // iOS 풀다운 메뉴: 넓고 둥근 모서리, 반투명 배경, 버튼 쪽 모서리에서 커지며 나타난다.
-          className="absolute right-0 top-full z-30 mt-1 w-56 origin-top-right overflow-hidden rounded-[14px] bg-surface-container-high/90 shadow-elev-3 backdrop-blur-xl transition-[opacity,scale] duration-200 ease-emphasized-decelerate starting:scale-75 starting:opacity-0"
+          className="absolute right-0 top-full z-30 mt-1 w-56 origin-top-right overflow-hidden rounded-[0.875rem] bg-surface-container-high/90 shadow-elev-3 backdrop-blur-xl transition-[opacity,scale] duration-200 ease-emphasized-decelerate starting:scale-75 starting:opacity-0"
         >
           {items.map((item, i) => (
             <button
@@ -216,7 +216,7 @@ function MeatballMenu({ label, items, circle, onSelect, onDismiss }: MeatballMen
                 onSelect(item)
               }}
               className={`state-layer flex min-h-11 w-full items-center gap-3 px-4 text-left text-body-lg ${
-                item.separator ? 'border-t-[6px] border-outline-variant/40' : '[&:not(:first-child)]:border-t [&:not(:first-child)]:border-outline-variant/60'
+                item.separator ? 'border-t-[0.375rem] border-outline-variant/40' : '[&:not(:first-child)]:border-t [&:not(:first-child)]:border-outline-variant/60'
               } ${item.destructive ? 'text-error' : 'text-on-surface'}`}
             >
               <span className="flex-1">{item.label}</span>

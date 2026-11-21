@@ -111,7 +111,7 @@ export default function BottomNavigationDemo() {
                 {badge !== undefined && (
                   <span
                     aria-hidden="true"
-                    className="absolute left-[calc(50%+4px)] top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-error px-1 text-[11px] font-medium leading-none text-on-error"
+                    className="absolute left-[calc(50%+0.25rem)] top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-error px-1 text-[0.6875rem] font-medium leading-none text-on-error"
                   >
                     {badge}
                   </span>

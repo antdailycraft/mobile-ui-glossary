@@ -9,7 +9,7 @@ import { useMediaQuery } from './lib/useMediaQuery'
 import { useTheme } from './lib/useTheme'
 
 /** Tailwind의 lg 기준점. 이 너비부터 사이드바를 상시 표시한다. */
-const DESKTOP_QUERY = '(min-width: 1024px)'
+const DESKTOP_QUERY = '(min-width: 64rem)'
 
 export function App() {
   const [routeId, navigate] = useHashRoute()
@@ -78,7 +78,7 @@ export function App() {
         </>
       )}
 
-      <main ref={mainRef} tabIndex={-1} className="outline-none lg:pl-[260px]">
+      <main ref={mainRef} tabIndex={-1} className="outline-none lg:pl-[16.25rem]">
         {contentErrors.length > 0 && (
           <div role="alert" className="mx-4 mt-2 rounded-xl bg-error-container p-4 text-body-md text-on-error-container">
             <p className="font-medium">콘텐츠 오류 {contentErrors.length}건</p>

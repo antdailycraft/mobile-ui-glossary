@@ -108,13 +108,13 @@ function useRadioKeys(count: number, value: number, onChange: (i: number) => voi
 function IosSegmented({ label, options, value, onChange }: { label: string; options: string[]; value: number; onChange: (i: number) => void }) {
   const { refs, onKeyDown } = useRadioKeys(options.length, value, onChange)
   return (
-    <div role="radiogroup" aria-label={label} onKeyDown={onKeyDown} className="relative flex rounded-[10px] bg-surface-container-highest p-0.5 dark:bg-surface-container-high">
+    <div role="radiogroup" aria-label={label} onKeyDown={onKeyDown} className="relative flex rounded-[0.625rem] bg-surface-container-highest p-0.5 dark:bg-surface-container-high">
       {/* 썸은 칸 하나 너비만큼 translateX로 움직인다. 선택을 칸마다 다시 그리지 않고 한 요소를 옮겨야 미끄러지는 느낌이 난다. */}
       <span
         aria-hidden="true"
         // 다크 테마에서는 iOS처럼 썸이 트랙보다 밝아야 선택된 칸으로 읽힌다.
-        className="absolute inset-y-0.5 left-0.5 rounded-[8px] bg-surface-container-lowest shadow-elev-1 dark:bg-outline-variant transition-transform duration-300 ease-emphasized"
-        style={{ width: `calc((100% - 4px) / ${options.length})`, transform: `translateX(${value * 100}%)` }}
+        className="absolute inset-y-0.5 left-0.5 rounded-[0.5rem] bg-surface-container-lowest shadow-elev-1 dark:bg-outline-variant transition-transform duration-300 ease-emphasized"
+        style={{ width: `calc((100% - 0.25rem) / ${options.length})`, transform: `translateX(${value * 100}%)` }}
       />
       {options.map((o, i) => (
         <button
@@ -127,7 +127,7 @@ function IosSegmented({ label, options, value, onChange }: { label: string; opti
           aria-checked={i === value}
           tabIndex={i === value ? 0 : -1}
           onClick={() => onChange(i)}
-          className={`relative min-h-11 flex-1 rounded-[8px] text-label-lg transition-colors ${i === value ? 'text-on-surface' : 'text-on-surface-variant'}`}
+          className={`relative min-h-11 flex-1 rounded-[0.5rem] text-label-lg transition-colors ${i === value ? 'text-on-surface' : 'text-on-surface-variant'}`}
         >
           {o}
         </button>
@@ -178,7 +178,7 @@ function M3Segmented({ label, options, mode, isSelected, onToggle }: M3Props) {
               selected ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface'
             }`}
           >
-            {selected && <Icon name="check" className="size-[18px] shrink-0" />}
+            {selected && <Icon name="check" className="size-[1.125rem] shrink-0" />}
             <span className="truncate">{o}</span>
           </button>
         )

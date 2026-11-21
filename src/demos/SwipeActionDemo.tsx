@@ -125,7 +125,7 @@ function SwipeRow({ item, open, onOpenChange, onDelete }: RowProps) {
           aria-hidden={!open}
           onClick={() => onDelete('삭제 버튼을 눌러')}
           className={`flex h-full flex-col items-center justify-center gap-1 text-label-md text-on-error transition-[width] duration-150 ${
-            fullSwipe ? 'w-full' : 'w-[88px]'
+            fullSwipe ? 'w-full' : 'w-[5.5rem]'
           }`}
         >
           <Icon name="delete" className="size-6" />
@@ -135,7 +135,7 @@ function SwipeRow({ item, open, onOpenChange, onDelete }: RowProps) {
 
       {/* 앞쪽 레이어: 실제 행. 세로 스크롤은 브라우저에 맡기고(pan-y) 가로 이동만 직접 처리한다. */}
       <div
-        {...drag.bind}
+        {...drag.bind} data-demo-interaction
         tabIndex={0}
         role="group"
         aria-label={`${item.title}. ← 키로 삭제 버튼 열기, Delete 키로 삭제`}
@@ -145,7 +145,7 @@ function SwipeRow({ item, open, onOpenChange, onDelete }: RowProps) {
           if (!drag.wasDrag() && open) onOpenChange(false, '탭해서')
         }}
         style={{ transform: `translateX(${x}px)`, touchAction: 'pan-y' }}
-        className={`relative flex min-h-[72px] cursor-grab select-none items-center gap-4 bg-surface py-2 pl-4 pr-1 active:cursor-grabbing ${
+        className={`relative flex min-h-[4.5rem] cursor-grab select-none items-center gap-4 bg-surface py-2 pl-4 pr-1 active:cursor-grabbing ${
           drag.dragging ? '' : 'transition-transform duration-300 ease-emphasized'
         }`}
       >

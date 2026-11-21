@@ -103,7 +103,7 @@ export default function ScrimDemo() {
             aria-labelledby="scrim-dialog-title"
             // 패널의 빈 곳을 눌러도 포커스가 패널 안에 머물도록 프로그램 포커스만 받게 한다.
             tabIndex={-1}
-            className="pointer-events-auto outline-none w-full max-w-[312px] rounded-[28px] bg-surface-container-high p-6 shadow-elev-3 transition-[opacity,scale] duration-200 ease-emphasized-decelerate starting:scale-95 starting:opacity-0"
+            className="pointer-events-auto outline-none w-full max-w-[19.5rem] rounded-[1.75rem] bg-surface-container-high p-6 shadow-elev-3 transition-[opacity,scale] duration-200 ease-emphasized-decelerate starting:scale-95 starting:opacity-0"
           >
             <h2 id="scrim-dialog-title" className="text-headline-sm">
               스크림 {current.label}

@@ -35,7 +35,7 @@ export const mdxComponents: MDXComponents = {
   table: (p) => (
     // 표가 화면보다 넓으면 표 자체만 가로로 스크롤되게 해서 페이지 전체가 가로로 밀리지 않게 한다.
     <div className="my-4 overflow-x-auto rounded-xl border border-outline-variant">
-      <table className="w-full min-w-[480px] border-collapse text-left text-body-md" {...p} />
+      <table className="w-full min-w-[30rem] border-collapse text-left text-body-md" {...p} />
     </div>
   ),
   th: (p) => <th className="border-b border-outline-variant bg-surface-container px-3 py-2.5 font-medium" {...p} />,

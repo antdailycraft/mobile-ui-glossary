@@ -32,7 +32,7 @@ export default function KebabMenuDemo() {
     >
       <ul>
         {THREADS.map((t) => (
-          <li key={t.id} className="flex min-h-[72px] items-center gap-4 py-2 pl-4 pr-1">
+          <li key={t.id} className="flex min-h-[4.5rem] items-center gap-4 py-2 pl-4 pr-1">
             <span
               aria-hidden="true"
               className="flex size-10 shrink-0 items-center justify-center rounded-full bg-tertiary-container text-title-md text-on-tertiary-container"

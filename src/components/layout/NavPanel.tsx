@@ -1,4 +1,4 @@
-import { useImperativeHandle, useMemo, useRef, useState, type KeyboardEvent, type ReactNode, type Ref } from 'react'
+import { useId, useImperativeHandle, useMemo, useRef, useState, type KeyboardEvent, type ReactNode, type Ref } from 'react'
 import { Icon } from '../Icon'
 import { ComponentNav } from './ComponentNav'
 import { SearchField } from './SearchField'
@@ -24,6 +24,9 @@ interface Props {
 
 /** 검색창과 컴포넌트 목록. 모바일 드로어와 데스크톱 사이드바가 같은 패널을 공유한다. */
 export function NavPanel({ header, items, currentId, onNavigate, onSelect, clearOnSelect, activeItemRef, inputRef }: Props) {
+  const [filtersOpen, setFiltersOpen] = useState(false)
+  const filterId = useId()
+  const filterButton = useRef<HTMLButtonElement>(null)
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<Category | ''>('')
   const [platform, setPlatform] = useState<Platform | ''>('')
@@ -34,6 +37,7 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
     category: category || undefined,
     platform: platform || undefined,
   }), [items, query, category, platform])
+  const filterCount = Number(Boolean(category)) + Number(Boolean(platform))
   const filtering = Boolean(normalize(query) || category || platform)
 
   const reset = () => {
@@ -43,7 +47,10 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
   }
 
   const select = () => {
-    if (clearOnSelect) reset()
+    if (clearOnSelect) {
+      reset()
+      setFiltersOpen(false)
+    }
     onSelect?.()
   }
 
@@ -64,23 +71,66 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
   return (
     <>
       {header}
-      <SearchField
-        value={query}
-        onChange={setQuery}
-        onKeyDown={onSearchKeyDown}
-        resultCount={results.length}
-        inputRef={searchRef}
-        filtering={filtering}
-      />
-      <div className="shrink-0 px-3 pb-2">
-        <div className="space-y-2">
+      <div className="flex shrink-0 items-center gap-2 px-3 pb-2">
+        <SearchField
+          value={query}
+          onChange={setQuery}
+          onKeyDown={onSearchKeyDown}
+          resultCount={results.length}
+          inputRef={searchRef}
+          filtering={filtering}
+        />
+        <button
+          ref={filterButton}
+          type="button"
+          aria-label={filterCount > 0 ? `필터 ${filterCount}` : '필터'}
+          title="필터"
+          aria-expanded={filtersOpen}
+          aria-controls={filterId}
+          onClick={() => setFiltersOpen(!filtersOpen)}
+          className={`state-layer inline-flex size-11 shrink-0 items-center justify-center rounded-lg ${
+            filtersOpen || filterCount > 0 ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant'
+          }`}
+        >
+          <Icon name="filterList" className="size-5" />
+          {filterCount > 0 && (
+            <span aria-hidden="true" className="absolute end-0.5 top-0.5 min-w-4 rounded-full bg-primary px-1 text-center text-label-md text-on-primary">
+              {filterCount}
+            </span>
+          )}
+        </button>
+      </div>
+      <div hidden={!filtersOpen && filterCount === 0} className="shrink-0 px-3 pb-2">
+        {filterCount > 0 && (
+          <div className="mb-2 flex flex-wrap gap-1">
+            {[
+              { name: category ? CATEGORY_LABELS[category] : '', clear: () => setCategory('') },
+              { name: platform ? PLATFORM_LABELS[platform] : '', clear: () => setPlatform('') },
+            ].filter(({ name }) => name).map(({ name, clear }) => (
+              <button
+                key={name}
+                type="button"
+                aria-label={`${name} 필터 해제`}
+                onClick={() => {
+                  clear()
+                  filterButton.current?.focus()
+                }}
+                className="state-layer inline-flex min-h-11 items-center gap-1 rounded-full bg-secondary-container px-3 text-label-md text-on-secondary-container"
+              >
+                {name}
+                <Icon name="close" className="size-4" />
+              </button>
+            ))}
+          </div>
+        )}
+        <div id={filterId} hidden={!filtersOpen} className="space-y-2 border-t border-outline-variant pt-2">
           <label className="grid grid-cols-[4rem_minmax(0,1fr)] items-center gap-2 text-body-md text-on-surface-variant">
             카테고리
             <span className="relative min-w-0">
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Category | '')}
-                className="min-h-11 w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-body-lg text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
+                className="nav-field w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
               >
                 <option value="">전체</option>
                 {CATEGORIES.map((value) => <option key={value} value={value}>{CATEGORY_LABELS[value]}</option>)}
@@ -94,7 +144,7 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
               <select
                 value={platform}
                 onChange={(e) => setPlatform(e.target.value as Platform | '')}
-                className="min-h-11 w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-body-lg text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
+                className="nav-field w-full appearance-none rounded-lg border border-outline bg-surface-container-low ps-2 pe-9 text-on-surface forced-colors:appearance-auto forced-colors:pe-2"
               >
                 <option value="">전체</option>
                 {PLATFORMS.map((value) => <option key={value} value={value}>{PLATFORM_LABELS[value]}</option>)}
@@ -102,16 +152,16 @@ export function NavPanel({ header, items, currentId, onNavigate, onSelect, clear
               <Icon name="expandMore" className="pointer-events-none absolute end-3 top-1/2 size-5 -translate-y-1/2 forced-colors:hidden" />
             </span>
           </label>
+          {filtering && (
+            <button
+              type="button"
+              onClick={() => { reset(); searchRef.current?.focus() }}
+              className="state-layer mt-1 min-h-11 rounded-lg px-3 text-label-lg text-primary"
+            >
+              검색 조건 초기화
+            </button>
+          )}
         </div>
-        {filtering && (
-          <button
-            type="button"
-            onClick={() => { reset(); searchRef.current?.focus() }}
-            className="state-layer mt-1 min-h-11 rounded-lg px-3 text-label-lg text-primary"
-          >
-            검색 조건 초기화
-          </button>
-        )}
       </div>
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[env(safe-area-inset-bottom)]">
         <ComponentNav

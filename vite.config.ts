@@ -52,16 +52,16 @@ export default defineConfig({
     refreshCssOnFileAdd(),
   ],
   // 같은 네트워크의 실제 휴대폰에서도 접속해 확인할 수 있도록 모든 인터페이스(0.0.0.0)에 바인딩한다.
-  // 디버깅·개발용 포트는 다른 서비스와 겹치지 않게 20000 이상을 쓰고, 이미 사용 중이면 다른 포트로 넘어가지 않고 실패하게 한다.
+  // 디버깅·개발용 포트는 다른 서비스와 겹치지 않게 20000 초과인 10의 배수을 쓰고, 이미 사용 중이면 다른 포트로 넘어가지 않고 실패하게 한다.
   server: {
     host: '0.0.0.0',
-    port: 20173,
+    port: 20170,
     strictPort: true,
     allowedHosts,
   },
   preview: {
     host: '0.0.0.0',
-    port: 20174,
+    port: 20180,
     strictPort: true,
     allowedHosts,
   },

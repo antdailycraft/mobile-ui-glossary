@@ -36,6 +36,7 @@ describe('NavPanel', () => {
   it('검색과 두 필터를 조합하고 빈 결과에서 초기화할 수 있다', async () => {
     const { user, input } = setup()
     await user.type(input, 'sheet')
+    await user.click(screen.getByRole('button', { name: '필터' }))
     await user.selectOptions(screen.getByLabelText('플랫폼'), 'ios')
     expect(links()).toHaveLength(2)
     await user.selectOptions(screen.getByLabelText('카테고리'), 'navigation')
@@ -45,6 +46,19 @@ describe('NavPanel', () => {
     expect(links()).toHaveLength(3)
     expect(document.activeElement).toBe(input)
     expect((input as HTMLInputElement).value).toBe('')
+  })
+
+  it('필터는 기본으로 접혀 있고 적용한 조건은 접은 상태에서도 해제할 수 있다', async () => {
+    const { user } = setup()
+    expect(screen.queryByRole('combobox')).toBeNull()
+    await user.click(screen.getByRole('button', { name: '필터' }))
+    await user.selectOptions(screen.getByRole('combobox', { name: '플랫폼' }), 'ios')
+    await user.click(screen.getByRole('button', { name: '필터 1' }))
+    expect(screen.queryByRole('combobox')).toBeNull()
+    expect(links()).toHaveLength(2)
+    await user.click(screen.getByRole('button', { name: 'iOS HIG 필터 해제' }))
+    expect(links()).toHaveLength(3)
+    expect(document.activeElement).toBe(screen.getByRole('button', { name: '필터' }))
   })
 
   it('한글 조합 중 Enter·방향키와 229 이벤트는 탐색하지 않는다', async () => {
@@ -63,6 +77,7 @@ describe('NavPanel', () => {
   it('검색어를 지운 뒤 검색창에 포커스를 유지하고 플랫폼 필터를 유지한다', async () => {
     const { user, input, inputRef } = setup()
     expect(inputRef.current).toBe(input)
+    await user.click(screen.getByRole('button', { name: '필터' }))
     await user.selectOptions(screen.getByLabelText('플랫폼'), 'ios')
     await user.type(input, 'modal')
     await user.click(screen.getByRole('button', { name: '검색어 지우기' }))
@@ -76,6 +91,7 @@ describe('NavPanel', () => {
 
   it('모바일에서 항목을 선택하면 조건을 지우고 닫기 콜백을 호출한다', async () => {
     const { user, input, onSelect } = setup(true)
+    await user.click(screen.getByRole('button', { name: '필터' }))
     await user.selectOptions(screen.getByLabelText('플랫폼'), 'ios')
     await user.type(input, 'modal')
     await user.keyboard('{Enter}')

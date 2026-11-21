@@ -151,7 +151,7 @@ export default function EmptyStateDemo() {
                 : 'border-outline text-on-surface-variant'
             }`}
           >
-            {scenario === s.value && <Icon name="check" className="size-[18px]" />}
+            {scenario === s.value && <Icon name="check" className="size-[1.125rem]" />}
             {s.label}
           </button>
         ))}

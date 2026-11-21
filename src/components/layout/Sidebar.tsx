@@ -32,12 +32,17 @@ export function Sidebar({ items, currentId, onNavigate, themeMode, onThemeChange
   return (
     <aside
       aria-label="컴포넌트 탐색"
-      className="fixed inset-y-0 left-0 z-20 flex w-[260px] flex-col border-r border-outline-variant bg-surface-container-low"
+      className="fixed inset-y-0 left-0 z-20 flex w-[16.25rem] flex-col border-r border-outline-variant bg-surface-container-low"
     >
       <NavPanel
         header={
-          <div className="flex h-16 shrink-0 items-center gap-1 pl-6 pr-1">
+          <div className="relative flex h-16 shrink-0 items-center gap-1 pl-6 pr-1">
             <p className="min-w-0 flex-1 truncate text-title-md text-on-surface">Mobile UI Glossary</p>
+            {import.meta.env.DEV && (
+              <span className="pointer-events-none absolute bottom-0.5 start-6 rounded bg-tertiary-container px-1.5 text-label-md text-on-tertiary-container">
+                BETA
+              </span>
+            )}
             <ThemeToggle mode={themeMode} onChange={onThemeChange} />
           </div>
         }

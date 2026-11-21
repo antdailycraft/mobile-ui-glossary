@@ -18,23 +18,23 @@ export function SearchField({ value, onChange, onKeyDown, inputRef, resultCount,
   const localRef = useRef<HTMLInputElement>(null)
   useImperativeHandle(inputRef, () => localRef.current!, [])
   return (
-    <div className="px-3 pb-2">
-      <div className="flex h-14 items-center gap-1 rounded-full bg-surface-container-high pl-4 pr-1 focus-within:outline-3 focus-within:outline-primary">
-        <Icon name="search" className="size-6 shrink-0 text-on-surface-variant" />
+    <div className="min-w-0 flex-1">
+      <div className="nav-field flex items-center gap-1 rounded-lg bg-surface-container-high pl-3 focus-within:outline-3 focus-within:outline-primary">
+        <Icon name="search" className="size-5 shrink-0 text-on-surface-variant" />
         <input
           ref={localRef}
           type="search"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="컴포넌트 검색"
+          placeholder="검색"
           aria-label="컴포넌트 검색"
           aria-describedby={countId}
           autoComplete="off"
           enterKeyHint="go"
-          className="h-full min-w-0 flex-1 bg-transparent px-2 text-body-lg text-on-surface outline-none placeholder:text-on-surface-variant [&::-webkit-search-cancel-button]:hidden"
+          className="h-full min-w-0 flex-1 bg-transparent px-2 text-inherit text-on-surface outline-none placeholder:text-on-surface-variant [&::-webkit-search-cancel-button]:hidden"
         />
-        {value && <IconButton icon="close" label="검색어 지우기" onClick={() => { onChange(''); localRef.current?.focus() }} />}
+        {value && <IconButton icon="close" className="size-11!" label="검색어 지우기" onClick={() => { onChange(''); localRef.current?.focus() }} />}
       </div>
       <p id={countId} aria-live="polite" className="sr-only">
         {filtering ? `검색 결과 ${resultCount}개` : ''}

@@ -140,7 +140,7 @@ function TooltipIconButton({ icon, label, tip, align = 'center', onStatus }: Too
       <span
         id={tipId}
         role="tooltip"
-        className={`pointer-events-none absolute top-full z-30 mt-1 whitespace-nowrap rounded-[4px] bg-inverse-surface px-2 py-1 text-body-sm text-inverse-on-surface transition-opacity duration-150 ${
+        className={`pointer-events-none absolute top-full z-30 mt-1 whitespace-nowrap rounded-[0.25rem] bg-inverse-surface px-2 py-1 text-body-sm text-inverse-on-surface transition-opacity duration-150 ${
           align === 'end' ? 'right-1' : 'left-1/2 -translate-x-1/2'
         } ${visible ? 'opacity-100' : 'opacity-0'}`}
       >

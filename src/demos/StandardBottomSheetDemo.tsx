@@ -11,8 +11,8 @@ const PLACES = [
   { id: 5, name: '등대 공원', meta: '도보 15분 · 항상 열림', x: '30%', y: '62%' },
 ]
 
-/** 접힌 상태에서 화면에 보이는 시트 높이(px). 핸들과 제목 줄이 들어갈 만큼만 남긴다. */
-const PEEK = 104
+/** 접힌 상태에서 화면에 보이는 시트 높이(rem). 핸들과 제목 줄이 들어갈 만큼만 남긴다. */
+const PEEK = '6.5rem'
 /** 이 거리(px) 이상 끌거나 이 속도(px/ms) 이상으로 튕기면 반대 상태로 전환한다. */
 const SNAP_DISTANCE = 48
 const SNAP_VELOCITY = 0.4
@@ -47,7 +47,7 @@ export default function StandardBottomSheetDemo() {
         ? drag.offset / 4
         : drag.offset
     : 0
-  const base = expanded ? '0px' : `calc(100% - ${PEEK}px)`
+  const base = expanded ? '0' : `calc(100% - ${PEEK})`
 
   const toggle = () => {
     setExpanded((v) => !v)
@@ -67,8 +67,8 @@ export default function StandardBottomSheetDemo() {
         className="absolute inset-0 bg-surface-container"
         style={{
           backgroundImage:
-            'linear-gradient(var(--md-outline-variant) 1px, transparent 1px), linear-gradient(90deg, var(--md-outline-variant) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
+            'linear-gradient(var(--md-outline-variant) 0.0625rem, transparent 0.0625rem), linear-gradient(90deg, var(--md-outline-variant) 0.0625rem, transparent 0.0625rem)',
+          backgroundSize: '2.5rem 2.5rem',
         }}
       >
         {PLACES.map((p) => (
@@ -90,12 +90,12 @@ export default function StandardBottomSheetDemo() {
 
       <section
         aria-label="주변 장소 목록"
-        className={`absolute inset-x-0 bottom-0 z-10 flex h-[78%] flex-col rounded-t-[28px] bg-surface-container-low shadow-elev-1 ${
+        className={`absolute inset-x-0 bottom-0 z-10 flex h-[78%] flex-col rounded-t-[1.75rem] bg-surface-container-low shadow-elev-1 ${
           drag.dragging ? '' : 'transition-transform duration-300 ease-emphasized'
         }`}
         style={{ transform: `translateY(calc(${base} + ${dy}px))` }}
       >
-        <div {...drag.bind} className="shrink-0 cursor-grab touch-none select-none active:cursor-grabbing">
+        <div {...drag.bind} data-demo-interaction className="shrink-0 cursor-grab touch-none select-none active:cursor-grabbing">
           <button
             type="button"
             aria-label={expanded ? '목록 접기' : '목록 펼치기'}
@@ -120,7 +120,7 @@ export default function StandardBottomSheetDemo() {
                 type="button"
                 onClick={() => pick(p.id, '목록')}
                 aria-current={selected === p.id ? 'true' : undefined}
-                className={`state-layer flex min-h-[72px] w-full items-center gap-4 px-6 text-left ${
+                className={`state-layer flex min-h-[4.5rem] w-full items-center gap-4 px-6 text-left ${
                   selected === p.id ? 'bg-secondary-container text-on-secondary-container' : ''
                 }`}
               >

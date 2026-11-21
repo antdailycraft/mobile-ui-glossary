@@ -47,7 +47,7 @@ export function NavDrawer({ open, onClose, items, currentId, onNavigate, returnF
         aria-modal="true"
         aria-label="컴포넌트 목록"
         inert={!open}
-        className={`absolute inset-y-0 left-0 flex w-[min(360px,calc(100vw-56px))] flex-col rounded-r-2xl bg-surface-container-low shadow-elev-1 outline-none transition-transform duration-300 ${
+        className={`absolute inset-y-0 left-0 flex w-[min(22.5rem,calc(100vw-3.5rem))] flex-col rounded-r-2xl bg-surface-container-low shadow-elev-1 outline-none transition-transform duration-300 ${
           open ? 'translate-x-0 ease-emphasized-decelerate' : '-translate-x-full ease-emphasized-accelerate'
         }`}
       >

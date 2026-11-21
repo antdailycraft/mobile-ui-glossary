@@ -83,13 +83,13 @@ export default function ModalBottomSheetDemo() {
         aria-modal="true"
         aria-labelledby="mbs-title"
         inert={!open}
-        className={`absolute inset-x-0 bottom-0 z-20 max-h-[85%] rounded-t-[28px] bg-surface-container-low pb-4 shadow-elev-1 ${
+        className={`absolute inset-x-0 bottom-0 z-20 max-h-[85%] rounded-t-[1.75rem] bg-surface-container-low pb-4 shadow-elev-1 ${
           drag.dragging ? '' : 'transition-transform duration-300 ease-emphasized'
         }`}
-        style={{ transform: open ? `translateY(${dragY}px)` : 'translateY(calc(100% + 16px))' }}
+        style={{ transform: open ? `translateY(${dragY}px)` : 'translateY(calc(100% + 1rem))' }}
       >
         {/* 드래그 영역: 핸들과 제목 줄. 목록 부분은 스크롤과 충돌하지 않도록 드래그 대상에서 뺐다. */}
-        <div {...drag.bind} className="cursor-grab touch-none select-none active:cursor-grabbing">
+        <div {...drag.bind} data-demo-interaction className="cursor-grab touch-none select-none active:cursor-grabbing">
           <button
             type="button"
             aria-label="시트 닫기"

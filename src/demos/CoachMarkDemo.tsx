@@ -30,6 +30,13 @@ interface Rect {
 export default function CoachMarkDemo() {
   const [step, setStep] = useState<number | null>(null)
   const [status, setStatus] = useState('“둘러보기 시작”을 눌러 코치 마크를 띄워 보세요.')
+  const [notes, setNotes] = useState([
+    { title: '회의록 정리', updated: '어제 수정' },
+    { title: '장보기 목록', updated: '어제 수정' },
+    { title: '여행 준비물', updated: '어제 수정' },
+  ])
+  const [composing, setComposing] = useState(false)
+  const [draft, setDraft] = useState('')
   const [rect, setRect] = useState<Rect | null>(null)
 
   const rootRef = useRef<HTMLDivElement>(null)
@@ -39,6 +46,12 @@ export default function CoachMarkDemo() {
     search: useRef<HTMLButtonElement>(null),
     filter: useRef<HTMLDivElement>(null),
     fab: useRef<HTMLButtonElement>(null),
+  }
+
+  const closeComposer = () => {
+    setComposing(false)
+    setDraft('')
+    targets.fab.current?.focus({ preventScroll: true })
   }
 
   const current = step === null ? null : STEPS[step]
@@ -99,10 +112,34 @@ export default function CoachMarkDemo() {
               </span>
             ))}
           </div>
-          {['회의록 정리', '장보기 목록', '여행 준비물'].map((t) => (
-            <div key={t} className="rounded-xl bg-surface-container px-4 py-3">
-              <p className="text-title-sm">{t}</p>
-              <p className="text-body-md text-on-surface-variant">어제 수정</p>
+          {composing && (
+            <form className="space-y-3 rounded-xl bg-surface-container p-3" onSubmit={(event) => {
+              event.preventDefault()
+              const title = draft.trim()
+              if (!title) return
+              setNotes((items) => [{ title, updated: '방금 추가' }, ...items])
+              setStatus('새 메모를 추가했습니다.')
+              closeComposer()
+            }}>
+              <label className="block text-label-lg">
+                새 메모 제목
+                <input
+                  autoFocus
+                  value={draft}
+                  onChange={(event) => setDraft(event.target.value)}
+                  className="mt-1 min-h-11 w-full rounded-lg border border-outline bg-surface px-3"
+                />
+              </label>
+              <div className="flex justify-end gap-2">
+                <button type="button" className={textButton} onClick={closeComposer}>취소</button>
+                <button type="submit" disabled={!draft.trim()} className={`${filledButton} disabled:opacity-50`}>저장</button>
+              </div>
+            </form>
+          )}
+          {notes.map((note, index) => (
+            <div key={notes.length - index} className="rounded-xl bg-surface-container px-4 py-3">
+              <p className="text-title-sm">{note.title}</p>
+              <p className="text-body-md text-on-surface-variant">{note.updated}</p>
             </div>
           ))}
           <button
@@ -123,6 +160,11 @@ export default function CoachMarkDemo() {
         ref={targets.fab as RefObject<HTMLButtonElement>}
         type="button"
         aria-label="새 메모"
+        aria-expanded={composing}
+        onClick={() => {
+          if (composing) closeComposer()
+          else setComposing(true)
+        }}
         className="state-layer absolute bottom-4 right-4 flex size-14 items-center justify-center rounded-2xl bg-primary-container text-on-primary-container shadow-elev-3"
       >
         <Icon name="add" />
@@ -145,7 +187,7 @@ export default function CoachMarkDemo() {
                 top: rect.y,
                 width: rect.w,
                 height: rect.h,
-                boxShadow: '0 0 0 9999px rgb(0 0 0 / 0.6)',
+                boxShadow: '0 0 0 624.938rem rgb(0 0 0 / 0.6)',
               }}
             />
           )}

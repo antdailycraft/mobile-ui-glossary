@@ -42,7 +42,7 @@ export function ComponentNav({ items, query, filtering, currentId, onSelect, act
           ref={active ? activeItemRef : undefined}
           aria-current={active ? 'page' : undefined}
           onClick={onSelect}
-          className={`state-layer flex min-h-14 items-center rounded-full px-4 text-label-lg ${
+          className={`state-layer flex min-h-11 items-center rounded-lg px-3 py-1 lg:pointer-fine:min-h-9 text-label-lg ${
             active ? 'bg-secondary-container text-on-secondary-container' : 'text-on-surface-variant'
           }`}
         >
@@ -63,22 +63,22 @@ export function ComponentNav({ items, query, filtering, currentId, onSelect, act
   }
 
   return (
-    <nav ref={listRef} aria-label="컴포넌트" onKeyDown={onKeyDown} className="px-3 pb-4">
+    <nav ref={listRef} aria-label="컴포넌트" onKeyDown={onKeyDown} className="px-3 pb-3">
       {filtering ? (
         <>
-          <h2 className="px-4 pb-2 pt-3 text-title-sm text-on-surface-variant">검색 결과 {items.length}개</h2>
+          <h2 className="px-3 pb-1 pt-2 text-title-sm text-on-surface-variant">검색 결과 {items.length}개</h2>
           <ul>{items.map(renderItem)}</ul>
         </>
       ) : (
         groupByCategory(items).map((group, idx) => (
           <section key={group.category} aria-labelledby={`${idPrefix}-${group.category}`}>
-            {idx > 0 && <hr className="mx-4 my-2 border-outline-variant" />}
+            {idx > 0 && <hr className="mx-3 my-1 border-outline-variant" />}
             {/* 카테고리 제목은 누를 수 없는 묶음 이름이다. 항목(링크)과 헷갈리지 않도록
                 작은 대문자 영문과 항목 개수를 붙여 "제목"처럼 보이게 한다.
                 좁은 사이드바에서 줄이 넘치면 단어 중간이 아니라 한국어와 영문 사이에서 나뉘도록 각각 nowrap으로 묶는다. */}
             <h2
               id={`${idPrefix}-${group.category}`}
-              className="flex items-start gap-2 px-4 pb-2 pt-4 text-label-md text-on-surface-variant"
+              className="flex items-start gap-2 px-3 pb-1 pt-2 text-label-md text-on-surface-variant"
             >
               <span className="min-w-0 flex-1">
                 <span className="whitespace-nowrap">{CATEGORY_LABELS[group.category]}</span>{' '}

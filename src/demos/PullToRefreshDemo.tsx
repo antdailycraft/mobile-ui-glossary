@@ -168,7 +168,7 @@ export default function PullToRefreshDemo() {
           }}
         >
           {phase === 'refreshing' ? (
-            <span className="size-6 animate-spin rounded-full border-[3px] border-primary border-t-transparent" />
+            <span className="size-6 animate-spin rounded-full border-[0.1875rem] border-primary border-t-transparent" />
           ) : (
             // 당긴 정도만큼 화살표가 돌고, 임계값을 넘으면 완전히 진한 색이 되어 "놓아도 된다"를 알린다.
             <span style={{ rotate: `${progress * 270}deg`, opacity: 0.4 + progress * 0.6 }}>
@@ -177,10 +177,10 @@ export default function PullToRefreshDemo() {
           )}
         </div>
 
-        <div ref={scrollRef} aria-busy={phase === 'refreshing'} className="h-full touch-pan-y overflow-y-auto overscroll-contain select-none">
+        <div ref={scrollRef} data-demo-interaction aria-busy={phase === 'refreshing'} className="h-full touch-pan-y overflow-y-auto overscroll-contain select-none">
           <ul>
             {posts.map((p) => (
-              <li key={p.id} className="flex min-h-[72px] items-center gap-4 py-2 pl-4 pr-4">
+              <li key={p.id} className="flex min-h-[4.5rem] items-center gap-4 py-2 pl-4 pr-4">
                 <span
                   aria-hidden="true"
                   className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary-container text-title-md text-on-primary-container"

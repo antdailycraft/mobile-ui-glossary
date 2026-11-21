@@ -45,6 +45,11 @@ export function TopAppBar({ title, drawerOpen, onMenu, menuButtonRef, themeMode,
       <p className="min-w-0 flex-1 truncate px-1 text-title-lg" aria-live="polite">
         {title}
       </p>
+      {import.meta.env.DEV && (
+        <span className="pointer-events-none absolute bottom-0.5 start-14 rounded bg-tertiary-container px-1.5 text-label-md text-on-tertiary-container">
+          BETA
+        </span>
+      )}
       <ThemeToggle mode={themeMode} onChange={onThemeChange} />
     </header>
   )

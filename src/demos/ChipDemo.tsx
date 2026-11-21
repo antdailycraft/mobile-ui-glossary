@@ -54,7 +54,7 @@ export default function ChipDemo() {
                 onClick={() => removeTerm(t)}
                 className="state-layer -my-1.5 ml-0.5 inline-flex size-11 items-center justify-center rounded-full text-on-surface-variant"
               >
-                <Icon name="close" className="size-[18px]" />
+                <Icon name="close" className="size-[1.125rem]" />
               </button>
             </span>
           ))}
@@ -75,7 +75,7 @@ export default function ChipDemo() {
                     : 'border border-outline-variant text-on-surface-variant'
                 }`}
               >
-                {on && <Icon name="check" className="size-[18px]" />}
+                {on && <Icon name="check" className="size-[1.125rem]" />}
                 {f}
               </button>
             )
@@ -106,7 +106,7 @@ export default function ChipDemo() {
               onClick={() => setStatus(`보조 칩 “${a.label}”을(를) 눌렀습니다. 보조 칩은 관련 동작을 바로 실행합니다.`)}
               className={`${chipBase} border border-outline-variant pl-2 text-on-surface`}
             >
-              <Icon name={a.icon} className="size-[18px] text-primary" />
+              <Icon name={a.icon} className="size-[1.125rem] text-primary" />
               {a.label}
             </button>
           ))}

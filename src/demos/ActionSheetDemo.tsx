@@ -78,11 +78,11 @@ export default function ActionSheetDemo() {
         // 제목 영역처럼 버튼이 아닌 곳을 눌러도 포커스가 시트 밖으로 빠져나가지 않게 한다.
         tabIndex={-1}
         className={`outline-none absolute inset-x-0 bottom-0 z-20 flex flex-col gap-2 p-2 transition-transform duration-300 ease-emphasized ${
-          open ? 'translate-y-0' : 'translate-y-[calc(100%+16px)]'
+          open ? 'translate-y-0' : 'translate-y-[calc(100%+1rem)]'
         }`}
       >
         {/* 제목·설명과 동작 버튼은 하나의 그룹, 취소는 분리된 그룹이다. 엄지가 닿기 쉬운 맨 아래에 취소를 둔다. */}
-        <div className="overflow-hidden rounded-[14px] bg-surface-container-highest/95 text-center backdrop-blur">
+        <div className="overflow-hidden rounded-[0.875rem] bg-surface-container-highest/95 text-center backdrop-blur">
           <div className="px-4 py-3">
             <h2 id="as-title" className="text-title-sm text-on-surface-variant">
               이 사진으로 무엇을 할까요?
@@ -110,7 +110,7 @@ export default function ActionSheetDemo() {
           ref={cancelRef}
           type="button"
           onClick={() => close('“취소”를 눌러 아무것도 하지 않고 닫았습니다.')}
-          className="state-layer min-h-14 w-full rounded-[14px] bg-surface-container-lowest text-[1.25rem] font-semibold text-primary"
+          className="state-layer min-h-14 w-full rounded-[0.875rem] bg-surface-container-lowest text-[1.25rem] font-semibold text-primary"
         >
           취소
         </button>

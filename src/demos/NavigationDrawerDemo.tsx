@@ -136,12 +136,12 @@ export default function NavigationDrawerDemo() {
         aria-modal="true"
         aria-label="메일 폴더"
         inert={!open}
-        {...drag.bind}
+        {...drag.bind} data-demo-interaction
         // 세로 스크롤은 브라우저에 맡기고 가로 드래그만 직접 처리한다.
-        className={`absolute inset-y-0 left-0 z-20 flex w-[80%] max-w-[360px] touch-pan-y flex-col rounded-r-2xl bg-surface-container-low py-3 shadow-elev-1 ${
+        className={`absolute inset-y-0 left-0 z-20 flex w-[80%] max-w-[22.5rem] touch-pan-y flex-col rounded-r-2xl bg-surface-container-low py-3 shadow-elev-1 ${
           drag.dragging ? '' : 'transition-transform duration-300 ease-emphasized'
         }`}
-        style={{ transform: open ? `translateX(${dragX}px)` : 'translateX(calc(-100% - 16px))' }}
+        style={{ transform: open ? `translateX(${dragX}px)` : 'translateX(calc(-100% - 1rem))' }}
       >
         <p className="px-7 pb-2 pt-3 text-title-sm text-on-surface-variant">메일</p>
         <nav aria-label="메일 폴더" className="min-h-0 flex-1 overflow-y-auto px-3">
