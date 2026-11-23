@@ -7,6 +7,10 @@
 
 ## [Unreleased]
 
+### 변경됨
+
+- 운영 주소를 https://mobileui.aidaon.com/ 으로 이전
+
 ### 추가됨 (Added)
 
 - Mobile Screen Layout 항목과 화면 영역을 눌러 역할을 확인하는 데모 추가

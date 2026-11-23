@@ -28,8 +28,8 @@ jobs:
           cache: npm
       - run: npm ci
       # build 스크립트가 tsc -b, vitest run, vite build를 차례로 실행한다.
-      # Pages는 https://<owner>.github.io/<repo>/ 아래에서 서비스되므로 base를 저장소 이름으로 맞춘다.
-      - run: npm run build -- --base=/${{ github.event.repository.name }}/
+      # 커스텀 도메인 https://mobileui.aidaon.com/ 루트에서 서비스하므로 Vite 기본 base(/)를 사용한다.
+      - run: npm run build
       - if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.PAGES_ENABLED == 'true'
         uses: actions/upload-pages-artifact@v4
         with:
