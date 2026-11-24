@@ -11,7 +11,7 @@ import { defineConfig, type Plugin } from 'vite'
 // Vite는 DNS 리바인딩 공격을 막기 위해 처음 보는 Host 헤더를 거부한다.
 // 이 PC의 호스트 이름(metis)과 Tailscale MagicDNS 도메인(*.ts.net)으로 들어오는 접속만 추가로 허용한다.
 // 앞에 점을 붙인 '.ts.net'은 그 하위 도메인 전체를 뜻한다.
-const allowedHosts = ['metis', '.ts.net']
+const allowedHosts = ['metis', '.ts.net', 'metis.aidaon.com']
 
 const CSS_ENTRY = fileURLToPath(new URL('./src/index.css', import.meta.url))
 
